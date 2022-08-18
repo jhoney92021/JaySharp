@@ -1,0 +1,15 @@
+C:\Users\16194\b-hive-test-suites\jaySharp\bin\Debug\net6.0\jaySharp.exe
+C:\Users\16194\b-hive-test-suites\jaySharp\bin\Debug\net6.0\jaySharp.deps.json
+C:\Users\16194\b-hive-test-suites\jaySharp\bin\Debug\net6.0\jaySharp.runtimeconfig.json
+C:\Users\16194\b-hive-test-suites\jaySharp\bin\Debug\net6.0\jaySharp.dll
+C:\Users\16194\b-hive-test-suites\jaySharp\bin\Debug\net6.0\jaySharp.pdb
+C:\Users\16194\b-hive-test-suites\jaySharp\obj\Debug\net6.0\jaySharp.csproj.AssemblyReference.cache
+C:\Users\16194\b-hive-test-suites\jaySharp\obj\Debug\net6.0\jaySharp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\16194\b-hive-test-suites\jaySharp\obj\Debug\net6.0\jaySharp.AssemblyInfoInputs.cache
+C:\Users\16194\b-hive-test-suites\jaySharp\obj\Debug\net6.0\jaySharp.AssemblyInfo.cs
+C:\Users\16194\b-hive-test-suites\jaySharp\obj\Debug\net6.0\jaySharp.csproj.CoreCompileInputs.cache
+C:\Users\16194\b-hive-test-suites\jaySharp\obj\Debug\net6.0\jaySharp.dll
+C:\Users\16194\b-hive-test-suites\jaySharp\obj\Debug\net6.0\refint\jaySharp.dll
+C:\Users\16194\b-hive-test-suites\jaySharp\obj\Debug\net6.0\jaySharp.pdb
+C:\Users\16194\b-hive-test-suites\jaySharp\obj\Debug\net6.0\jaySharp.genruntimeconfig.cache
+C:\Users\16194\b-hive-test-suites\jaySharp\obj\Debug\net6.0\ref\jaySharp.dll
