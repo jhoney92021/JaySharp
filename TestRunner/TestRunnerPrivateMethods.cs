@@ -2,6 +2,7 @@ using System.Reflection;
 using JaySharp.ConsoleExtensions;
 using JaySharp.Evaluations.Integers;
 using JaySharp.IntermediateObjectDefinitions;
+using JaySharp.Evaluations;
 
 namespace JaySharp.TestRunner;
 
@@ -49,7 +50,7 @@ public static partial class TestRunner
                 }
                 catch(Exception exception)
                 {
-                    if(exception.InnerException is IntegerEvaluationException)
+                    if(exception.InnerException is EvaluationException)
                     {
                         TestLogger.Exception(exception?.InnerException?.ToString(), method.Name);
                         continue;

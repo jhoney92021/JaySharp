@@ -1,7 +1,7 @@
 using System.Runtime.Serialization;
 using JaySharp.ConsoleExtensions;
 
-namespace JaySharp.Evaluations.Integers;
+namespace JaySharp.Evaluations.Boolean;
 
 public class BooleanEvaluationException : Exception
 {

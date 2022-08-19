@@ -3,7 +3,7 @@ using JaySharp.ConsoleExtensions;
 
 namespace JaySharp.Evaluations.Integers;
 
-public class IntegerEvaluationException : Exception
+public class IntegerEvaluationException : EvaluationException
 {
     public IntegerEvaluationException()
     {

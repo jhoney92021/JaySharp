@@ -3,7 +3,7 @@ using JaySharp.TestAttributes;
 
 namespace JaySharp.Tests;
 
-[JayTestSuite("BooleanTests")]
+[JayTestSuite]
 public static class BooleanTests
 {
     [JayTest]

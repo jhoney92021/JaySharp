@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using JaySharp.ConsoleExtensions;
 
 namespace JaySharp.Evaluations.Integers;

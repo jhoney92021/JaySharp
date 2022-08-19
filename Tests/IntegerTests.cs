@@ -3,8 +3,8 @@ using JaySharp.TestAttributes;
 
 namespace JaySharp.Tests;
 
-[JayTestSuite("IntegerEvaluationsTests")]
-public static class IntegerEvaluationsTests
+[JayTestSuite]
+public static class IntegerTests
 {
     [JayTest("CompareNumbers")]
     public static void CompareNumbers()
