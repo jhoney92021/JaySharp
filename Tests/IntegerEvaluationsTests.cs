@@ -1,4 +1,4 @@
-using JaySharp.Predicates.Integers;
+using JaySharp.Evaluations.Integers;
 using JaySharp.TestAttributes;
 
 namespace JaySharp.Tests;

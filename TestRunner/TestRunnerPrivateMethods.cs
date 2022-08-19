@@ -1,6 +1,6 @@
 using System.Reflection;
 using JaySharp.ConsoleExtensions;
-using JaySharp.Predicates.Integers;
+using JaySharp.Evaluations.Integers;
 using JaySharp.IntermediateObjectDefinitions;
 
 namespace JaySharp.TestRunner;

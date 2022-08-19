@@ -1,5 +1,5 @@
 using JaySharp.ConsoleExtensions;
-namespace JaySharp.Predicates.Boolean;
+namespace JaySharp.Evaluations.Boolean;
 
 public static class BooleanEvaluations
 {

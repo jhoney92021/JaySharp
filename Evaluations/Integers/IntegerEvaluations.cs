@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using JaySharp.ConsoleExtensions;
 
-namespace JaySharp.Predicates.Integers;
+namespace JaySharp.Evaluations.Integers;
 
 public static class IntegerEvaluations
 {

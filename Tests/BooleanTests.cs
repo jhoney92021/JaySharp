@@ -1,4 +1,4 @@
-using JaySharp.Predicates.Boolean;
+using JaySharp.Evaluations.Boolean;
 using JaySharp.TestAttributes;
 
 namespace JaySharp.Tests;

@@ -1,7 +1,7 @@
 using System.Runtime.Serialization;
 using JaySharp.ConsoleExtensions;
 
-namespace JaySharp.Predicates.Integers;
+namespace JaySharp.Evaluations.Integers;
 
 public class IntegerEvaluationException : Exception
 {
