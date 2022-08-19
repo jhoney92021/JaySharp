@@ -1,5 +1,6 @@
 using JaySharp.Predicates.Boolean;
 using JaySharp.TestRunner;
+
 namespace JaySharp.Tests;
 
 [JayTestSuite("BooleanTests")]

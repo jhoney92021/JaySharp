@@ -1,37 +1,73 @@
 using System;
 using System.Reflection;
 using  JaySharp.Tests;
+using JaySharp.ConsoleExtensions;
 
 namespace JaySharp.TestRunner;
 
 public static class TestRunner
 {
-    public static List<JayTestSuite> TestSuitesToRun {get;set;} = new List<JayTestSuite>();
+    private static Type TestType {get;} = typeof(JayTest);
+    private static Type TestSuiteType {get;} = typeof(JayTestSuite);
+    private static Assembly? Assembly {get;} = Assembly.GetAssembly(typeof(JayTestSuite));
+    private static Type[]? TestSuitesToRun {get;set;}
+    private static List<MethodInfo>? TestsToRun {get;set;}
 
-    public static void BuildTestSuites()
-    {   
-        var testSuiteType = typeof(JayTestSuite);
-        Assembly assembly = Assembly.GetAssembly(testSuiteType);
-        Console.WriteLine(assembly);
-        
-        var test = GetTypesWithAttribute(assembly, testSuiteType);
-        Console.WriteLine(test.FirstOrDefault());
-        Console.WriteLine("DLKFJASDKF");
-
-        var testType = typeof(JayTest);
-        // Assembly assembly1 = Assembly.GetAssembly(testType);
-        Console.WriteLine(assembly);
-        
-        var test1 = GetMethodsWithAttribute(test.FirstOrDefault(), testType);
-        Console.WriteLine(test1.FirstOrDefault().Name);
-        Console.WriteLine("9999999999");
-
+    private static void GetTestSuites()
+    {        
+        if(Assembly != null)
+        {
+            TestSuitesToRun = GetTypesWithAttribute(Assembly, TestSuiteType);            
+        }
     }
 
-    static Type[] GetTypesWithAttribute(Assembly assembly, Type attribute) {
+    private static void GetTests()
+    {
+        if(TestSuitesToRun != null)
+        {
+            TestsToRun = new List<MethodInfo>();
+            foreach(var suite in TestSuitesToRun)
+            {
+                TestsToRun.AddRange(
+                    GetMethodsWithAttribute(suite, TestType)
+                );
+            }
+        }
+    }
+
+    private static void RunTests()
+    {
+        if(TestsToRun != null)
+        {
+            foreach(var method in TestsToRun)
+            {
+                try
+                {
+                    var parameters = method.GetParameters();
+                    method.GetBaseDefinition().Invoke(null, parameters ?? null);
+                }
+                catch(Exception exception)
+                {
+                    TestLogger.Failed(exception.InnerException.ToString());
+                    continue;
+                }
+            } 
+        }
+    }
+
+    public static void GetAndRunAllTestSuites()
+    {
+        GetTestSuites(); 
+        GetTests(); 
+        RunTests(); 
+    }
+
+    private static Type[] GetTypesWithAttribute(Assembly assembly, Type attribute)
+    {
         return assembly.GetTypes().Where(m=>m.GetCustomAttributes(attribute, true).Length > 0).ToArray();
-    }
-    static MethodInfo[] GetMethodsWithAttribute(Type classType, Type attribute) {                
+    }    
+    private static MethodInfo[] GetMethodsWithAttribute(Type classType, Type attribute)
+    {                
         return classType.GetMethods().Where(m=>m.GetCustomAttributes(attribute, true).Length > 0).ToArray();
     }
 }
