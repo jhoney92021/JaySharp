@@ -48,7 +48,7 @@ public static class TestRunner
                 }
                 catch(Exception exception)
                 {
-                    TestLogger.Failed(exception.InnerException.ToString());
+                    TestLogger.Failed(exception?.InnerException?.ToString());
                     continue;
                 }
             } 
