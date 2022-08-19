@@ -5,22 +5,6 @@ namespace JaySharp.Predicates.Integers;
 
 public static class IntegerEvaluations
 {
-    public static void Is1(this int toEvaluate)
-    {
-        if(toEvaluate != 1)
-        {
-            throw new IntegerEvaluationException($"Expected 1 but was {toEvaluate}");
-        }
-
-        StackTrace stackTrace = new StackTrace();
-        var calledTestMethod = stackTrace?.GetFrame(1)?.GetMethod()?.Name;
-        Console.ForegroundColor = ConsoleColor.Green;
-        // Console.BackgroundColor = ConsoleColor.DarkGray;
-        Console.WriteLine($"{calledTestMethod} -- passed!!!");
-        Console.ForegroundColor = ConsoleColor.Gray;
-        // Console.BackgroundColor = ConsoleColor.Black;        
-    }
-
     public static void Be(this int toEvaluate, int toCompare)
     {
         if(toEvaluate == toCompare)

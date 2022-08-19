@@ -19,4 +19,10 @@ public static class TestLogger
         Console.WriteLine($"¿¿ {calledTestMethod} -- failed -- {failureReason} ??");
         Console.ForegroundColor = ConsoleColor.Gray;        
     }
+    public static void Exception(string? failureReason, string method)
+    {        
+        Console.ForegroundColor = ConsoleColor.Red;        
+        Console.WriteLine($"¿¿ {method} -- failed -- {failureReason} ??");
+        Console.ForegroundColor = ConsoleColor.Gray;        
+    }
 }
