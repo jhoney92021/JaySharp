@@ -1,18 +1,11 @@
 using System.Reflection;
 using JaySharp.TestAttributes;
+using JaySharp.IntermediateObjectDefinitions;
 
 namespace JaySharp.TestRunner;
 
-public class SuiteAndName
-{
-    public Type Type {get;set;}
-    public string Name {get;set;}
-}
-public struct MethodAndSuiteName
-{
-    public MethodInfo Method;
-    public string SuiteName;
-}
+
+
 
 public static partial class TestRunner
 {

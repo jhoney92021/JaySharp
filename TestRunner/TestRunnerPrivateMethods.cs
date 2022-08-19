@@ -1,5 +1,7 @@
 using System.Reflection;
 using JaySharp.ConsoleExtensions;
+using JaySharp.Predicates.Integers;
+using JaySharp.IntermediateObjectDefinitions;
 
 namespace JaySharp.TestRunner;
 
@@ -31,11 +33,15 @@ public static partial class TestRunner
     {
         if(TestsToRun != null)
         {
+            string currentSuiteName = string.Empty;
             foreach(var methodAndSuiteName in TestsToRun)
             {
+                if(currentSuiteName != methodAndSuiteName.SuiteName || string.IsNullOrEmpty(currentSuiteName))
+                {
+                    currentSuiteName= methodAndSuiteName.SuiteName;
+                    Logger.PrintWithColor($"~~ Running {currentSuiteName} ~~", ConsoleColor.Cyan);
+                }
                 var method = methodAndSuiteName.Method;
-                var suitename = methodAndSuiteName.SuiteName;
-                Logger.PrintWithColor($"Attempting to run {method.Name} from {suitename}", ConsoleColor.Yellow);
                 try
                 {
                     var parameters = method.GetParameters();
@@ -43,8 +49,11 @@ public static partial class TestRunner
                 }
                 catch(Exception exception)
                 {
-                    TestLogger.Exception(exception?.InnerException?.ToString(), method.Name);
-                    continue;
+                    if(exception.InnerException is IntegerEvaluationException)
+                    {
+                        TestLogger.Exception(exception?.InnerException?.ToString(), method.Name);
+                        continue;
+                    }
                 }
             } 
         }
