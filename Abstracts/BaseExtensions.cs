@@ -1,3 +1,4 @@
+using System;
 namespace JaySharp.Abstracts;
 
 public abstract class BaseExtensions
