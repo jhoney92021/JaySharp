@@ -1,8 +1,8 @@
 using System.Diagnostics;
 
-namespace JaySharp.ConsoleExtensions;
+namespace JaySharp.Loggers;
 
-public class Logger
+public class JayLogger
 {
     public static void PrintInBlue(string toPrint)
     {

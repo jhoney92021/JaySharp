@@ -1,4 +1,4 @@
-using JaySharp.ConsoleExtensions;
+using JaySharp.Loggers;
 namespace JaySharp.Evaluations.Boolean;
 
 public static class BooleanEvaluations
@@ -11,7 +11,7 @@ public static class BooleanEvaluations
         }
         else
         {
-            TestLogger.PassedInBlue();
+            TestLogger.PassedInCyan();
         }
     }
     public static void IsFalse(this bool toEvaluate)
@@ -22,7 +22,7 @@ public static class BooleanEvaluations
         }
         else
         {
-            TestLogger.PassedInBlue();
+            TestLogger.PassedInCyan();
         }
     }
     public static void IsOn(this bool toEvaluate)
@@ -33,7 +33,7 @@ public static class BooleanEvaluations
         }
         else
         {
-            TestLogger.PassedInBlue();
+            TestLogger.PassedInCyan();
         }
     }
     public static void IsOff(this bool toEvaluate)
@@ -44,7 +44,7 @@ public static class BooleanEvaluations
         }
         else
         {
-            TestLogger.PassedInBlue();
+            TestLogger.PassedInCyan();
         }
     }
 }

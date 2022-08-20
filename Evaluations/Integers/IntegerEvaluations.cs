@@ -1,4 +1,4 @@
-using JaySharp.ConsoleExtensions;
+using JaySharp.Loggers;
 
 namespace JaySharp.Evaluations.Integers;
 
@@ -8,7 +8,7 @@ public static class IntegerEvaluations
     {
         if(toEvaluate == toCompare)
         {
-            TestLogger.PassedInBlue();
+            TestLogger.PassedInCyan();
         }
         else
         {
@@ -30,7 +30,7 @@ public static class IntegerEvaluations
     {
         if(toEvaluate.Value == toCompare)
         {
-            TestLogger.PassedInBlue();
+            TestLogger.PassedInCyan();
         }
         else if (toEvaluate.ThrowException)
         {

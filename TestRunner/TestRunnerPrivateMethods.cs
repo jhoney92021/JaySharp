@@ -1,6 +1,5 @@
 using System.Reflection;
-using JaySharp.ConsoleExtensions;
-using JaySharp.Evaluations.Integers;
+using JaySharp.Loggers;
 using JaySharp.IntermediateObjectDefinitions;
 using JaySharp.Evaluations;
 
@@ -40,7 +39,7 @@ public static partial class TestRunner
                 if(currentSuiteName != methodAndSuiteName.SuiteName || string.IsNullOrEmpty(currentSuiteName))
                 {
                     currentSuiteName= methodAndSuiteName.SuiteName;
-                    Logger.PrintWithColor($"~~ Running {currentSuiteName} ~~", ConsoleColor.Cyan);
+                    JayLogger.PrintWithColor($"~~ Running {currentSuiteName} ~~", ConsoleColor.Blue);
                 }
                 var method = methodAndSuiteName.Method;
                 try

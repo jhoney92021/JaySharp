@@ -1,13 +1,13 @@
 using System.Diagnostics;
-namespace JaySharp.ConsoleExtensions;
+namespace JaySharp.Loggers;
 
 public static class TestLogger
 {
-    public static void PassedInBlue()
+    public static void PassedInCyan()
     {
         StackTrace stackTrace = new StackTrace();
         var calledTestMethod = stackTrace?.GetFrame(2)?.GetMethod()?.Name;
-        Console.ForegroundColor = ConsoleColor.Blue;        
+        Console.ForegroundColor = ConsoleColor.Cyan;        
         Console.WriteLine($"¡¡ {calledTestMethod} -- passed !!");
         Console.ForegroundColor = ConsoleColor.Gray;        
     }
