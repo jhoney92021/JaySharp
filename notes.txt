@@ -1,0 +1,6 @@
+apply stash@{stash_index}
+
+$ git stash apply (shortcut for git stash apply stash@{0})
+
+
+git stash apply stash@{0} /*apply most recent stash*/
