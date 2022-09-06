@@ -2,6 +2,7 @@ using System.Reflection;
 using JaySharp.Loggers;
 using JaySharp.IntermediateObjectDefinitions;
 using JaySharp.Evaluations;
+using JaySharp.TestAttributes;
 
 namespace JaySharp.TestRunner;
 
@@ -24,7 +25,7 @@ public static partial class TestRunner
             {
                 TestsToRun.AddRange(
                     GetMethodsWithAttribute(suite, TestType)
-                );
+                );                
             }
         }
     }

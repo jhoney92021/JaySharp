@@ -3,7 +3,7 @@ using JaySharp.TestAttributes;
 
 namespace JaySharp.Tests;
 
-[JayTestSuite]
+[JayTestSuite(Off = true)]
 public static class DictionaryTests
 {
     [JayTest]
@@ -39,7 +39,7 @@ public static class DictionaryTests
     {
         var underTest = new Dictionary<int,int>{{1,1},{2,2},{3,3}};
         var toCompare = new Dictionary<int,int>{{1,1},{2,2},{3,3},{5,5},{6,6}};
-        underTest.Oughta().Be(toCompare);  
+        underTest.Oughta().Be(toCompare);
     }    
 
     [JayTest]

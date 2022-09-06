@@ -5,6 +5,7 @@ namespace JaySharp.TestAttributes;
 public class JayTestSuite : Attribute
 {
     public string Name {get;set;} = "unset";
+    public bool Off {get;set;}
     public JayTestSuite()
     {
         StackTrace stackTrace = new StackTrace();
