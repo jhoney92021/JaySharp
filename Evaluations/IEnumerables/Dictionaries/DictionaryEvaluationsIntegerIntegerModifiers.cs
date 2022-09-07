@@ -1,3 +1,4 @@
+using JaySharp.Evaluations.IEnumerable;
 using JaySharp.Loggers;
 
 namespace JaySharp.Evaluations.Dictionaries;
@@ -24,14 +25,14 @@ public static partial class DictionaryEvaluations
         }        
         else
         {
-            var toEvaluateMessage = BuildDictionaryMessage(toEvaluate.Value, DictionaryComparisonMessageType.OughtaBeen);
-            var evaluated = BuildDictionaryMessage(missing1.ToDictionary(anon => anon.Key, anon => anon.Value), DictionaryComparisonMessageType.Evaluated);
-            var compared = BuildDictionaryMessage(missing2.ToDictionary(anon => anon.Key, anon => anon.Value), DictionaryComparisonMessageType.Compared);
+            var toEvaluateMessage = BuildDictionaryMessage(toEvaluate.Value, IEnumerableComparisonMessageType.OughtaBeen);
+            var evaluated = BuildDictionaryMessage(missing1.ToDictionary(anon => anon.Key, anon => anon.Value), IEnumerableComparisonMessageType.Evaluated);
+            var compared = BuildDictionaryMessage(missing2.ToDictionary(anon => anon.Key, anon => anon.Value), IEnumerableComparisonMessageType.Compared);
 
             TestLogger.Failed(toEvaluateMessage + evaluated + compared);            
         }
     }
-    private static string BuildDictionaryMessage(Dictionary<int,int> missing, DictionaryComparisonMessageType messageType)
+    private static string BuildDictionaryMessage(Dictionary<int,int> missing, IEnumerableComparisonMessageType messageType)
     {
         if(missing.Count() == 0){return string.Empty;}
 

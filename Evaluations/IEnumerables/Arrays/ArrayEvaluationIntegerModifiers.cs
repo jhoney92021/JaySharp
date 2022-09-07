@@ -1,3 +1,4 @@
+using JaySharp.Evaluations.IEnumerable;
 using JaySharp.Loggers;
 
 namespace JaySharp.Evaluations.Lists;
@@ -24,18 +25,18 @@ public static partial class ArrayEvaluations
         }        
         else
         {
-            var toEvaluateMessage = BuildListMessage(toEvaluate.Value, ListComparisonMessageType.OughtaBeen);
-            var evaluated = BuildListMessage(missing1, ListComparisonMessageType.Evaluated);
-            var compared = BuildListMessage(missing2, ListComparisonMessageType.Compared);
+            var toEvaluateMessage = BuildListMessage(toEvaluate.Value, IEnumerableComparisonMessageType.OughtaBeen);
+            var evaluated = BuildListMessage(missing1, IEnumerableComparisonMessageType.Evaluated);
+            var compared = BuildListMessage(missing2, IEnumerableComparisonMessageType.Compared);
 
             TestLogger.Failed(toEvaluateMessage + evaluated + compared);            
         }
     }
-    private static string BuildListMessage(int[] missing, ListComparisonMessageType messageType)
+    private static string BuildListMessage(int[] missing, IEnumerableComparisonMessageType messageType)
     {
         if(missing.Count() == 0){return string.Empty;}
 
-        var message = ListComparisonMessages.Messages[messageType];
+        var message = ArrayComparisonMessages.Messages[messageType];
 
         foreach(var number in missing)
         {

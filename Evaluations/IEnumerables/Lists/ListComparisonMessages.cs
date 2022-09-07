@@ -1,19 +1,14 @@
-namespace JaySharp.Evaluations.Lists;
+using JaySharp.Evaluations.IEnumerable;
 
-public enum ListComparisonMessageType
-{
-    OughtaBeen,
-    Evaluated,
-    Compared
-}
+namespace JaySharp.Evaluations.Lists;
 
 public static class ListComparisonMessages
 {
-    public static Dictionary<ListComparisonMessageType,string> Messages =
-                new Dictionary<ListComparisonMessageType, string>
+    public static Dictionary<IEnumerableComparisonMessageType,string> Messages =
+                new Dictionary<IEnumerableComparisonMessageType, string>
                 {
-                    {ListComparisonMessageType.OughtaBeen, "\nOughta been { "},
-                    {ListComparisonMessageType.Evaluated ,  "evaluated list was missing { "},
-                    {ListComparisonMessageType.Compared  ,  "compared list was missing { "}
+                    {IEnumerableComparisonMessageType.OughtaBeen, "\nOughta been { "},
+                    {IEnumerableComparisonMessageType.Evaluated ,  "evaluated list was missing { "},
+                    {IEnumerableComparisonMessageType.Compared  ,  "compared list was missing { "}
                 };
 }
