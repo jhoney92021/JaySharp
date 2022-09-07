@@ -4,9 +4,6 @@ using JaySharp.IntermediateObjectDefinitions;
 
 namespace JaySharp.TestRunner;
 
-
-
-
 public static partial class TestRunner
 {
     private static Type TestType {get;} = typeof(JayTest);
