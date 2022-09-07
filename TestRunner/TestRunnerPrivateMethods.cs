@@ -23,8 +23,7 @@ public static partial class TestRunner
             int idx = 0;
             TestsToRun = new List<MethodAndSuiteName>();
             foreach(var suite in TestSuitesToRun)
-            {
-                
+            {                
                 if(ValidateSuiteIsOn(idx)) TestsToRun.AddRange(GetMethodsWithAttribute(suite, TestType));  
                 idx++;
             }
@@ -36,7 +35,7 @@ public static partial class TestRunner
         if(TestsToRun != null)
         {
             string currentSuiteName = string.Empty;
-
+            int idx = 0;
             foreach(var methodAndSuiteName in TestsToRun)
             {
                 if(currentSuiteName != methodAndSuiteName.SuiteName || string.IsNullOrEmpty(currentSuiteName))
@@ -47,8 +46,12 @@ public static partial class TestRunner
                 var method = methodAndSuiteName.Method;
                 try
                 {
-                    var parameters = method.GetParameters();
-                    method.GetBaseDefinition().Invoke(null, parameters ?? null);
+                    if(ValidateTestIsOn(idx))
+                    {
+                        var parameters = method.GetParameters();
+                        method.GetBaseDefinition().Invoke(null, parameters ?? null);
+                    }
+                    idx++;
                 }
                 catch(Exception exception)
                 {
@@ -85,6 +88,21 @@ public static partial class TestRunner
         if(TestSuitesToRun.Count() > idx)
         {
             var attributeData = TestSuitesToRun[idx].Type.GetCustomAttributesData();
+            
+            var namedArguments = attributeData
+                    .SelectMany(anon => anon.NamedArguments)
+                    .Where(anon => anon.MemberName == "On");         
+            
+            return !namedArguments.Any(na => na.TypedValue.Value.ToString() == ((int)Is.Off).ToString());            
+        }
+
+        return false;
+    }
+    private static bool ValidateTestIsOn(int idx)
+    {
+        if(TestsToRun.Count() > idx)
+        {
+            var attributeData = TestsToRun[idx].Method.GetCustomAttributesData();
             
             var namedArguments = attributeData
                     .SelectMany(anon => anon.NamedArguments)
