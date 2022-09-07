@@ -1,6 +1,7 @@
 namespace JaySharp.TestAttributes;
+
 public enum Is
 {
-    On,
-    Off
+    Off,
+    On
 }

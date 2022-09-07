@@ -5,14 +5,19 @@ namespace JaySharp.TestAttributes;
 public class JayTestSuite : Attribute
 {
     public string Name {get;set;} = "unset";
-    public bool Off {get;set;}
+    public Is On {get;set;} = Is.On;
     public JayTestSuite()
     {
+        On = Is.On;
         StackTrace stackTrace = new StackTrace();
         Name = stackTrace?.GetFrame(2)?.GetMethod()?.Name ?? "stack was null";
     }
-    public JayTestSuite(string name)
+}
+
+public static class TurnTestSuiteOff
+{
+    public static void TurnOff(this JayTestSuite toTurnOff)
     {
-        Name = name;
+        toTurnOff.On = Is.Off;
     }
 }

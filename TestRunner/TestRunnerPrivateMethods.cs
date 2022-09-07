@@ -20,31 +20,13 @@ public static partial class TestRunner
     {
         if(TestSuitesToRun != null)
         {
-            Type currentSuite;
             int idx = 0;
             TestsToRun = new List<MethodAndSuiteName>();
             foreach(var suite in TestSuitesToRun)
             {
-
-                currentSuite = TestSuitesToRun[idx].Type;
-JayLogger.PrintWithColor($"~~ base {TestSuitesToRun[idx].Type.Attributes} ~~", ConsoleColor.Blue);
-JayLogger.PrintWithColor($"~~ declare {TestSuitesToRun[idx].Type.GetCustomAttributesData()[0]} ~~", ConsoleColor.Blue);
-JayLogger.PrintWithColor($"~~ declare {TestSuitesToRun[idx].Type.GetCustomAttributesData()[0].AttributeType} ~~", ConsoleColor.Green);
-var ff = TestSuitesToRun[idx].Type.GetCustomAttributesData();
-JayLogger.PrintWithColor($"~~ ff {ff.FirstOrDefault()} ~~", ConsoleColor.Green);
-var fsf = ff.SelectMany(anon => anon.NamedArguments).Where(anon => anon.MemberName == "Off");
-JayLogger.PrintWithColor($"~~ fsf {fsf.Count()} ~~", ConsoleColor.Yellow);
-JayLogger.PrintWithColor($"~~ fsf {fsf.FirstOrDefault()} ~~", ConsoleColor.Green);
-var bb = fsf.Select(na => na.TypedValue.Value);
-JayLogger.PrintWithColor($"~~ bb {bb.FirstOrDefault()} ~~", ConsoleColor.Green);
-JayLogger.PrintWithColor($"~~ decasdasdaslare {TestSuitesToRun[idx].Type.GetCustomAttribute(typeof(JayTestSuite))} ~~", ConsoleColor.Blue);
-JayLogger.PrintWithColor($"~~ decasdasdaslare {TestSuitesToRun[idx].Type.GetCustomAttributesData().Select(anon => anon.NamedArguments[0].TypedValue.Value)} ~~", ConsoleColor.Red);
-JayLogger.PrintWithColor($"~~ decasdasdaslare {TestSuitesToRun[idx].Type.GetCustomAttributesData().Select(anon => anon.NamedArguments[0].MemberInfo.Name)} ~~", ConsoleColor.Red);
+                
+                if(ValidateSuiteIsOn(idx)) TestsToRun.AddRange(GetMethodsWithAttribute(suite, TestType));  
                 idx++;
-JayLogger.PrintWithColor($"~~ is type of {currentSuite} ~~", ConsoleColor.Blue);
-                TestsToRun.AddRange(
-                    GetMethodsWithAttribute(suite, TestType)
-                );                
             }
         }
     }
@@ -96,5 +78,21 @@ JayLogger.PrintWithColor($"~~ is type of {currentSuite} ~~", ConsoleColor.Blue);
                 .Where(methodInfo=>methodInfo.GetCustomAttributes(attribute, true).Length > 0)
                 .Select(methodInfo => new MethodAndSuiteName{Method = methodInfo, SuiteName = suite.Name })
                 .ToArray();
+    }
+
+    private static bool ValidateSuiteIsOn(int idx)
+    {
+        if(TestSuitesToRun.Count() > idx)
+        {
+            var attributeData = TestSuitesToRun[idx].Type.GetCustomAttributesData();
+            
+            var namedArguments = attributeData
+                    .SelectMany(anon => anon.NamedArguments)
+                    .Where(anon => anon.MemberName == "On");         
+            
+            return !namedArguments.Any(na => na.TypedValue.Value.ToString() == ((int)Is.Off).ToString());            
+        }
+
+        return false;
     }
 }

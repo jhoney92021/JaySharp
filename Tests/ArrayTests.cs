@@ -3,7 +3,7 @@ using JaySharp.TestAttributes;
 
 namespace JaySharp.Tests;
 
-[JayTestSuite]
+[JayTestSuite(On = Is.Off)]
 public static class ArrayTests
 {
     [JayTest]

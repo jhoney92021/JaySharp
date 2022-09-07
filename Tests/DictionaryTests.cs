@@ -3,7 +3,7 @@ using JaySharp.TestAttributes;
 
 namespace JaySharp.Tests;
 
-[JayTestSuite(Off = true)]
+[JayTestSuite(On = Is.Off)]
 public static class DictionaryTests
 {
     [JayTest]
