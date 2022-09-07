@@ -85,6 +85,7 @@ public static partial class TestRunner
 
     private static bool ValidateSuiteIsOn(int idx)
     {
+        if(TestSuitesToRun == null) return false;
         if(TestSuitesToRun.Count() > idx)
         {
             var attributeData = TestSuitesToRun[idx].Type.GetCustomAttributesData();
@@ -93,13 +94,14 @@ public static partial class TestRunner
                     .SelectMany(anon => anon.NamedArguments)
                     .Where(anon => anon.MemberName == "On");         
             
-            return !namedArguments.Any(na => na.TypedValue.Value.ToString() == ((int)Is.Off).ToString());            
+            return !namedArguments.Any(na => na.TypedValue.Value?.ToString() == ((int)Is.Off).ToString());            
         }
 
         return false;
     }
     private static bool ValidateTestIsOn(int idx)
     {
+        if(TestsToRun == null) return false;
         if(TestsToRun.Count() > idx)
         {
             var attributeData = TestsToRun[idx].Method.GetCustomAttributesData();
@@ -108,7 +110,7 @@ public static partial class TestRunner
                     .SelectMany(anon => anon.NamedArguments)
                     .Where(anon => anon.MemberName == "On");         
             
-            return !namedArguments.Any(na => na.TypedValue.Value.ToString() == ((int)Is.Off).ToString());            
+            return !namedArguments.Any(na => na.TypedValue.Value?.ToString() == ((int)Is.Off).ToString());            
         }
 
         return false;
