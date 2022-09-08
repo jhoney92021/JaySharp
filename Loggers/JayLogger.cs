@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using JaySharp.TestRunner;
 
 namespace JaySharp.Loggers;
 
@@ -25,5 +26,10 @@ public class JayLogger
         Console.ForegroundColor = printColor;        
         Console.WriteLine(toPrint);
         Console.ForegroundColor = ConsoleColor.Gray;        
+    }
+
+    public static void PrintIfVerbose(string toPrint, ConsoleColor colorToPrint)
+    {
+        if(Settings.LogLevel == Loggers.LogLevel.Verbose) Loggers.JayLogger.PrintWithColor(toPrint,colorToPrint);
     }
 }

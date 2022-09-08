@@ -1,6 +1,7 @@
 using System.Reflection;
 using JaySharp.IntermediateObjectDefinitions;
 using JaySharp.TestAttributes;
+using JaySharp.Loggers;
 
 namespace JaySharp.TestRunner;
 
@@ -11,6 +12,7 @@ public static partial class TestRunner
         if(Assembly != null)
         {
             TestSuitesToRun = GetTypesWithAttribute(Assembly, TestSuiteType);
+            JayLogger.PrintIfVerbose($"~~ Retrieved {TestSuitesToRun.Count()} Test Suites ~~", ConsoleColor.Yellow);
         }
     }
 

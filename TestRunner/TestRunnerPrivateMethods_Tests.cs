@@ -18,6 +18,7 @@ public static partial class TestRunner
                 if(ValidateSuiteIsOn(idx)) TestsToRun.AddRange(GetMethodsWithAttribute(suite, TestType));  
                 idx++;
             }
+            JayLogger.PrintIfVerbose($"~~ Retrieved {TestsToRun.Count()} Tests ~~", ConsoleColor.Yellow);
         }
     }
 
@@ -32,7 +33,8 @@ public static partial class TestRunner
                 if(currentSuiteName != methodAndSuiteName.SuiteName || string.IsNullOrEmpty(currentSuiteName))
                 {
                     currentSuiteName = methodAndSuiteName.SuiteName;
-                    JayLogger.PrintWithColor($"~~ Running {currentSuiteName} ~~", ConsoleColor.Blue);
+                    JayLogger.PrintIfVerbose($"~~ Running {currentSuiteName} ~~", ConsoleColor.Blue);
+                    TestsSuitesStarted++;
                 }
                 var method = methodAndSuiteName.Method;
                 try
@@ -43,6 +45,7 @@ public static partial class TestRunner
                         method.GetBaseDefinition().Invoke(null, parameters ?? null);
                     }
                     idx++;
+                    TestsStarted++;
                 }
                 catch(Exception exception)
                 {
@@ -53,6 +56,8 @@ public static partial class TestRunner
                     }
                 }
             } 
+            JayLogger.PrintIfVerbose($"|| {TestsSuitesStarted} Tests Suites Started ||", ConsoleColor.Gray);
+            JayLogger.PrintIfVerbose($"|| {TestsStarted} Tests Started        ||", ConsoleColor.Gray);
         }
     }
 

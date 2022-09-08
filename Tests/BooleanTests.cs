@@ -8,13 +8,13 @@ namespace JaySharp.Tests;
 [JayTestSuite]
 public static class BooleanTests
 {
-    [JayTest]
+    [JayTest(On = Is.Off)]
     public static void IsTrue()
     {
         var underTest = true;
         underTest.IsTrue();  
     }
-    [JayTest]
+    [JayTest(On = Is.Off)]
     public static void IsTrue_Fail()
     {
         var underTest = false;
@@ -23,7 +23,7 @@ public static class BooleanTests
     [JayTest]
     public static void IsOn()
     {
-        var underTest = false;
+        var underTest = true;
         underTest.IsOn();  
     }
     [JayTest]
@@ -37,13 +37,13 @@ public static class BooleanTests
     {
         var underTest = false;
         var convertedValue = underTest.ConvertToInt();  
-        convertedValue.Oughta().Be(1);
+        convertedValue.Oughta().Be(0);
     }
     [JayTest]
     public static void ConvertToIs()
     {
         var underTest = false;
         var convertedValue = underTest.ConvertToIs(); 
-        convertedValue.Oughta().Be(Is.On); 
+        convertedValue.Oughta().Be(Is.Off); 
     }
 }

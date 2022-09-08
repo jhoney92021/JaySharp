@@ -54,7 +54,7 @@ public static class BooleanEvaluations
     }
     public static void IsOn(this bool toEvaluate)
     {
-        if(toEvaluate.ConvertToIs() == Is.On)
+        if(toEvaluate.ConvertToIs() != Is.On)
         {
             TestLogger.Failed("Expected to be on but was off");
         }
@@ -65,7 +65,7 @@ public static class BooleanEvaluations
     }
     public static void IsOff(this bool toEvaluate)
     {
-        if(toEvaluate.ConvertToIs() == Is.Off)
+        if(toEvaluate.ConvertToIs() != Is.Off)
         {
             TestLogger.Failed("Expected to be off but was on");
         }
