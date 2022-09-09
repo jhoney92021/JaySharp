@@ -1,6 +1,5 @@
-﻿using JaySharp.Tests;
-using JaySharp.TestRunner;
-using JaySharp.Loggers;
+﻿using JaySharp.TestSuite.TestRunner;
+using JaySharp.Shared.Loggers;
 
 namespace JaySharp;
 
@@ -9,6 +8,6 @@ class Program
     static void Main() 
     {
         Settings.LogLevel = LogLevel.Verbose;
-        TestRunner.TestRunner.GetAndRunAllTestSuites();         
+        TestRunner.GetAndRunAllTestSuites();         
     }
 }

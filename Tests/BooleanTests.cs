@@ -1,7 +1,7 @@
-using JaySharp.Evaluations.Boolean;
-using JaySharp.Evaluations.Integers;
-using JaySharp.Evaluations.Enum;
-using JaySharp.TestAttributes;
+using JaySharp.Shared.Evaluations.Boolean;
+using JaySharp.Shared.Evaluations.Integers;
+using JaySharp.Shared.Evaluations.Enum;
+using JaySharp.TestSuite.TestAttributes;
 
 namespace JaySharp.Tests;
 

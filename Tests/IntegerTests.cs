@@ -1,5 +1,5 @@
-using JaySharp.Evaluations.Integers;
-using JaySharp.TestAttributes;
+using JaySharp.Shared.Evaluations.Integers;
+using JaySharp.TestSuite.TestAttributes;
 
 namespace JaySharp.Tests;
 
