@@ -16,6 +16,7 @@ public static partial class TestRunner
             foreach(var suite in TestSuitesToRun)
             {                
                 if(ValidateSuiteIsOn(idx)) TestsToRun.AddRange(GetMethodsWithAttribute(suite, TestType));  
+                TestsSuitesStarted++;
                 idx++;
             }
             JayLogger.PrintIfVerbose($"~~ Retrieved {TestsToRun.Count()} Tests ~~", ConsoleColor.Yellow);
@@ -34,7 +35,7 @@ public static partial class TestRunner
                 {
                     currentSuiteName = methodAndSuiteName.SuiteName;
                     JayLogger.PrintIfVerbose($"~~ Running {currentSuiteName} ~~", ConsoleColor.Blue);
-                    TestsSuitesStarted++;
+
                 }
                 var method = methodAndSuiteName.Method;
                 try
@@ -60,6 +61,8 @@ public static partial class TestRunner
                 }
                 catch(Exception exception)
                 {
+                    TestsStarted--;
+                    TestsCompleted--;
                     if(exception.InnerException is EvaluationException)
                     {
                         TestLogger.Exception(exception?.InnerException?.ToString(), method.Name);
