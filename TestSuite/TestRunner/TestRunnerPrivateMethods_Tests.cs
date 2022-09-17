@@ -42,7 +42,18 @@ public static partial class TestRunner
                     if(ValidateTestIsOn(idx))
                     {
                         var parameters = method.GetParameters();
-                        method.GetBaseDefinition().Invoke(null, parameters ?? null);
+                        try
+                        {
+                            method.GetBaseDefinition().Invoke(null, parameters ?? null);
+                        }
+                        catch
+                        {
+                            TestsCompleted--;
+                        }
+                        finally
+                        {
+                            TestsCompleted++;
+                        }
                     }
                     idx++;
                     TestsStarted++;
@@ -57,7 +68,8 @@ public static partial class TestRunner
                 }
             } 
             JayLogger.PrintIfVerbose($"|| {TestsSuitesStarted} Tests Suites Started ||", ConsoleColor.Gray);
-            JayLogger.PrintIfVerbose($"|| {TestsStarted} Tests Started        ||", ConsoleColor.Gray);
+            JayLogger.PrintIfVerbose($"|| {TestsStarted} Tests Started       ||", ConsoleColor.Gray);
+            JayLogger.PrintIfVerbose($"|| {TestsCompleted} Tests Completed     ||", ConsoleColor.Gray);
         }
     }
 

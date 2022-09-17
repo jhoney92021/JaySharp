@@ -12,4 +12,6 @@ public static partial class TestRunner
     private static List<MethodAndSuiteName>? TestsToRun {get;set;}
     private static int TestsSuitesStarted {get;set;}
     private static int TestsStarted {get;set;}
+    private static int TestsSuitesCompleted {get;set;}
+    private static int TestsCompleted {get;set;}
 }
