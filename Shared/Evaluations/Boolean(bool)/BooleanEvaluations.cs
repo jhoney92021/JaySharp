@@ -5,16 +5,6 @@ namespace JaySharp.Shared.Evaluations.Boolean;
 
 public static class BooleanEvaluations
 {
-    public static (bool,bool) Oughta(this bool toEvaluate)
-    {        
-        return (toEvaluate, false);
-    }
-    
-    public static (bool,bool) Must(this bool toEvaluate)
-    {        
-        return (toEvaluate, true);
-    }
-
     public static void Be(this (bool Value,bool ThrowException) toEvaluate, bool toCompare)
     {
         if(toEvaluate.Value == toCompare)

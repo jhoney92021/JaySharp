@@ -1,6 +1,10 @@
 namespace JaySharp.Shared.MethodExtensions;
 public static class MustMethod
 {    
+    public static (bool,bool) Must(this bool toEvaluate)
+    {        
+        return (toEvaluate, true);
+    }    
     public static (int,bool) Must(this int toEvaluate)
     {        
         return (toEvaluate, true);
