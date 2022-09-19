@@ -1,5 +1,5 @@
 namespace JaySharp.Shared.MethodExtensions;
-public static class MustMethod
+public static partial class MustMethod
 {    
     public static (bool,bool) Must(this bool toEvaluate)
     {        
@@ -10,10 +10,6 @@ public static class MustMethod
         return (toEvaluate, true);
     }
     public static (char,bool) Must(this char toEvaluate)
-    {        
-        return (toEvaluate, true);
-    }
-    public static (string,bool) Must(this string toEvaluate)
     {        
         return (toEvaluate, true);
     }
