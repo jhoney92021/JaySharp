@@ -3,7 +3,7 @@ using JaySharp.TestSuite.TestAttributes;
 
 namespace JaySharp.Shared.Evaluations.Enum;
 
-public static class EnumEvaluations
+public static class IsEvaluations
 {
     public static (Is,bool) Oughta(this Is toEvaluate)
     {        
