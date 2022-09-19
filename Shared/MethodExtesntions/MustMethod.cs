@@ -13,4 +13,8 @@ public static class MustMethod
     {        
         return (toEvaluate, true);
     }
+    public static (string,bool) Must(this string toEvaluate)
+    {        
+        return (toEvaluate, true);
+    }
 }

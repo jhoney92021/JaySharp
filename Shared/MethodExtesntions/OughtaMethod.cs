@@ -12,5 +12,9 @@ public static class OughtaMethod
     public static (char,bool) Oughta(this char toEvaluate)
     {        
         return (toEvaluate, false);
+    }    
+    public static (string,bool) Oughta(this string toEvaluate)
+    {        
+        return (toEvaluate, false);
     }
 }
