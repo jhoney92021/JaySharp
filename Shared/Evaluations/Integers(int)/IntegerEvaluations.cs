@@ -4,28 +4,6 @@ namespace JaySharp.Shared.Evaluations.Integers;
 
 public static class IntegerEvaluations
 {
-    public static void Be(this int toEvaluate, int toCompare)
-    {
-        if(toEvaluate == toCompare)
-        {
-            TestLogger.PassedInCyan();
-        }
-        else
-        {
-            TestLogger.Failed($"Oughta been {toEvaluate} but was {toCompare}");
-        }
-    }
-
-    public static (int,bool) Oughta(this int toEvaluate)
-    {        
-        return (toEvaluate, false);
-    }
-    
-    public static (int,bool) Must(this int toEvaluate)
-    {        
-        return (toEvaluate, true);
-    }
-
     public static void Be(this (int Value,bool ThrowException) toEvaluate, int toCompare)
     {
         if(toEvaluate.Value == toCompare)
