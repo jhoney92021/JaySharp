@@ -5,6 +5,10 @@ public static partial class OughtaMethod
     {        
         return (toEvaluate, false);
     }
+    public static (T[],bool) Oughta<T>(this T[] toEvaluate)
+    {        
+        return (toEvaluate, false);
+    }
     public static (List<T>,bool) Oughta<T>(this List<T> toEvaluate)
     {        
         return (toEvaluate, false);
