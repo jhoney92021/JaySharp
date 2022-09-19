@@ -1,5 +1,6 @@
 using JaySharp.Shared.Evaluations.Dictionaries;
 using JaySharp.TestSuite.TestAttributes;
+using JaySharp.Shared.MethodExtensions;
 
 namespace JaySharp.Tests;
 

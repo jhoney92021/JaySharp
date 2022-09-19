@@ -13,4 +13,8 @@ public static partial class MustMethod
     {        
         return (toEvaluate, true);
     }
+    public static (Dictionary<TKey,TValue>,bool) Must<TKey,TValue>(this Dictionary<TKey,TValue>  toEvaluate)
+    {        
+        return (toEvaluate, true);
+    }
 }
