@@ -5,4 +5,8 @@ public static partial class MustMethod
     {        
         return (toEvaluate, true);
     }
+    public static (List<T>,bool) Must<T>(this List<T>  toEvaluate)
+    {        
+        return (toEvaluate, true);
+    }
 }
