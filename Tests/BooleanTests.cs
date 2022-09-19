@@ -5,7 +5,7 @@ using JaySharp.TestSuite.TestAttributes;
 
 namespace JaySharp.Tests;
 
-[JayTestSuite]
+[JayTestSuite(On = Is.Off)]
 public static class BooleanTests
 {
     [JayTest(On = Is.Off)]

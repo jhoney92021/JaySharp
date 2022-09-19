@@ -3,7 +3,7 @@ using JaySharp.TestSuite.TestAttributes;
 
 namespace JaySharp.Tests;
 
-[JayTestSuite(On = Is.Off)]
+[JayTestSuite(On = Is.On)]
 public static class IntegerTests
 {
     [JayTest("CompareNumbers")]
