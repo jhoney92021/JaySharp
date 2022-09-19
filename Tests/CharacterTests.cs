@@ -9,13 +9,13 @@ public static class CharacterTests
     [JayTest("CompareCharacters")]
     public static void CompareCharacters()
     {
-        var underTest = '9';
-        underTest.Oughta().Be('9');
+        var underTest = 'p';
+        underTest.Oughta().Be('p');
     }
     [JayTest("CompareCharacters_Fail")]
     public static void CompareCharacters_Fail()
     {
-        var underTest = '1';
+        var underTest = 'p';
         underTest.Oughta().Be('Q');
     }
     [JayTest("CompareCharacters_Must_Be")]
@@ -27,7 +27,8 @@ public static class CharacterTests
     [JayTest("CompareCharacters_Must_Be_Fail", On = Is.Off)]
     public static void CompareCharacters_Must_Be_Fail()
     {
-        var underTest = '1';
-        underTest.Must().Be('a');
+        var underTest = 'q';
+        
+        underTest.Must().Be('P');
     }
 }
