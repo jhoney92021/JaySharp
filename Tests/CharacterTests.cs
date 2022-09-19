@@ -1,4 +1,5 @@
 using JaySharp.Shared.Evaluations.Characters;
+using JaySharp.Shared.MethodExtensions;
 using JaySharp.TestSuite.TestAttributes;
 
 namespace JaySharp.Tests;
