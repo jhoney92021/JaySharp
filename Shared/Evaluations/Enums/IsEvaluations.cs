@@ -5,16 +5,6 @@ namespace JaySharp.Shared.Evaluations.Enum;
 
 public static class IsEvaluations
 {
-    public static (Is,bool) Oughta(this Is toEvaluate)
-    {        
-        return (toEvaluate, false);
-    }
-    
-    public static (Is,bool) Must(this Is toEvaluate)
-    {        
-        return (toEvaluate, true);
-    }
-
     public static void Be(this (Is Value,bool ThrowException) toEvaluate, Is toCompare)
     {
         if(toEvaluate.Value == toCompare)

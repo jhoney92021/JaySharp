@@ -2,6 +2,7 @@ using JaySharp.Shared.Evaluations.Boolean;
 using JaySharp.Shared.Evaluations.Integers;
 using JaySharp.Shared.Evaluations.Enum;
 using JaySharp.TestSuite.TestAttributes;
+using JaySharp.Shared.MethodExtensions;
 
 namespace JaySharp.Tests;
 
