@@ -4,7 +4,7 @@ using JaySharp.Shared.MethodExtensions;
 
 namespace JaySharp.Tests;
 
-[JayTestSuite(On = Is.On)]
+[JayTestSuite(On = Is.Off)]
 public static class IntegerTests
 {
     [JayTest("CompareNumbers")]

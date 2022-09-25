@@ -6,7 +6,7 @@ using JaySharp.Shared.MethodExtensions;
 
 namespace JaySharp.Tests;
 
-[JayTestSuite]
+[JayTestSuite(On = Is.Off)]
 public static class IsTests
 {
     [JayTest]

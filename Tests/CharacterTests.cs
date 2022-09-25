@@ -4,7 +4,7 @@ using JaySharp.TestSuite.TestAttributes;
 
 namespace JaySharp.Tests;
 
-[JayTestSuite(On = Is.On)]
+[JayTestSuite(On = Is.Off)]
 public static class CharacterTests
 {
     [JayTest("CompareCharacters")]
