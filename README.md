@@ -5,6 +5,7 @@ This README would normally document whatever steps are necessary to get your app
 ### Quick Links ###
 * [JaySharp Testing Docs](#jaySharp_testing_docs)
 * [JaySharp CLI Commands](#jaySharp_cli_commands)
+* [Git CLI Commands](#git_cli_commands)
 * [DotNet CLI Commands](#dotnet_cli_commands)
 * [EF Migrations CLI Commands](#ef_migrations_cli_commands)
 * [Sql Lite](#sql_lite_commands)
@@ -42,6 +43,13 @@ This README would normally document whatever steps are necessary to get your app
 * dotnet build  --builds a project (there are options for verbosity like -v d[etailed])
 * dotnet watch run --runs a project while also listening for changes to files (can edit code while in a persistant run mode)
 <a name="dotnet_cli_commands"></a>
+
+### Git CLI Commands ###
+* stashing
+    - apply stash@{stash_index}
+    - git stash apply (shortcut for git stash apply stash@{0})
+    - git stash apply stash@{0} /*apply most 
+<a name="git_cli_commands"></a>
 
 # Testing Documentation #
 <a name="jaySharp_testing_docs"></a>
