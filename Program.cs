@@ -10,8 +10,17 @@ class Program
     {        
         if(args.Contains("--JayTest")) 
         {
-            JayLogger.PrintWithColor(ASCI_Headers.JayTest_StarWars, ConsoleColor.Yellow);
-            JayLogger.PrintWithColor(ASCI_Headers.ByBHiveTechnoligies, ConsoleColor.Red);            
+            // JayLogger.PrintWithColor(ASCI_Headers.JayTest_StarWars, ConsoleColor.Yellow);
+            // JayLogger.PrintWithColor(ASCI_Headers.ByBHiveTechnoligies_StarWars, ConsoleColor.Red);
+
+            JayLogger.PrintWithColor(ASCI_Headers.JayTest_3D, ConsoleColor.Yellow);
+            JayLogger.PrintWithColor(ASCI_Headers.ByBHiveTechnoligies_3D, ConsoleColor.Red);
+
+            // JayLogger.PrintWithColor(ASCI_Headers.JayTest_Murica, ConsoleColor.Blue);
+            // JayLogger.PrintWithColor(ASCI_Headers.ByBHiveTechnoligies_Murica, ConsoleColor.Red);
+
+            // JayLogger.PrintWithColor(ASCI_Headers.JayTest_Halloween, ConsoleColor.Green);
+            // JayLogger.PrintWithColor(ASCI_Headers.ByBHiveTechnoligies_Halloween, ConsoleColor.Red);
         }
         
 
