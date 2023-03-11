@@ -7,7 +7,7 @@ public static class TestLogger
 {
     public static void PassedInCyan()
     {
-        if(Settings.LogLevel != LogLevel.Succinct)
+        if(TestSettings.LogLevel != LogLevel.Succinct)
         {
             StackTrace stackTrace = new StackTrace();
             var calledTestMethod = stackTrace?.GetFrame(2)?.GetMethod()?.Name;

@@ -1,6 +1,6 @@
 ﻿using JaySharp.TestSuite.TestRunner;
 using JaySharp.Shared.Loggers;
-using System.Reflection;
+using JaySharp.CommandLineArguments;
 
 namespace JaySharp;
 
@@ -8,13 +8,28 @@ class Program
 { 
     static void Main(string[] args) 
     {
-        // if(!args.Contains("JaySharp")) return;
+        // if(!args.HasBaseArguement()) return;
+        if(!args.Contains("--J")) return;
         
-        // if(args.Contains("- RunTests"))
-        // {
-            Settings.LogLevel = LogLevel.Verbose;
+
+        if(args.Contains("-RunTests"))
+        {
+            if(args.Contains("-AllLogs"))
+            {
+                TestSettings.LogLevel = LogLevel.Verbose;
+            }
+            
+            if(args.Contains("-AllSuites"))
+            {
+                TestSettings.RunAllSuites = true;            
+            }
+            
+            if(args.Contains("-AllTests"))
+            {
+                TestSettings.RunAllTests = true;
+            }
             TestRunner.GetAndRunAllTestSuites();       
-        // } 
+        } 
         
         // if (args.Contains("version"))
         // {
@@ -28,5 +43,3 @@ class Program
         // }
     }
 }
-
-

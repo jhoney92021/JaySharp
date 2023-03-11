@@ -30,6 +30,6 @@ public class JayLogger
 
     public static void PrintIfVerbose(string toPrint, ConsoleColor colorToPrint)
     {
-        if(Settings.LogLevel == Loggers.LogLevel.Verbose) Loggers.JayLogger.PrintWithColor(toPrint,colorToPrint);
+        if(TestSettings.LogLevel == Loggers.LogLevel.Verbose) Loggers.JayLogger.PrintWithColor(toPrint,colorToPrint);
     }
 }

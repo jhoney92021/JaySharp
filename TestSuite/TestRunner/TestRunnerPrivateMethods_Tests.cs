@@ -90,6 +90,8 @@ public static partial class TestRunner
         if(TestsToRun == null) return false;
         if(TestsToRun.Count() > idx)
         {
+            if(TestSettings.RunAllTests){return true;}
+            
             var attributeData = TestsToRun[idx].Method.GetCustomAttributesData();
             
             var namedArguments = attributeData

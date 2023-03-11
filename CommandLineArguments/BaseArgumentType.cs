@@ -18,9 +18,14 @@ public static class BaseArgumentTypeExtensions
         ,{BaseArgumentType.JaySharp, "J"}
     };
 
+    public static bool HasBaseArguement(this string[] toParse)
+    {
+        return toParse[2] == "--";
+    }
+
     public static BaseArgumentType ToBaseArgumentType(this string toParse)
     {
         JayLogger.PrintInBlue(toParse);
-        return BaseArgumentType.None;
+        return AcceptedBaseArguments.ContainsValue(toParse) ? BaseArgumentType.JaySharp : BaseArgumentType.None;
     }
 }

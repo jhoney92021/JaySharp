@@ -30,6 +30,8 @@ public static partial class TestRunner
         if(TestSuitesToRun == null) return false;
         if(TestSuitesToRun.Count() > idx)
         {
+            if(TestSettings.RunAllSuites){return true;}
+
             var attributeData = TestSuitesToRun[idx].Type.GetCustomAttributesData();
             
             var namedArguments = attributeData
