@@ -7,9 +7,12 @@ namespace JaySharp;
 class Program 
 { 
     static void Main(string[] args) 
-    {
-        // if(!args.HasBaseArguement()) return;
-        if(!args.Contains("--J")) return;
+    {        
+        if(args.Contains("--JayTest")) 
+        {
+            JayLogger.PrintWithColor(ASCI_Headers.JayTest_StarWars, ConsoleColor.Yellow);
+            JayLogger.PrintWithColor(ASCI_Headers.ByBHiveTechnoligies, ConsoleColor.Red);            
+        }
         
 
         if(args.Contains("-RunTests"))

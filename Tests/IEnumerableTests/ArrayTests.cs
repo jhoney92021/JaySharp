@@ -4,7 +4,7 @@ using JaySharp.Shared.MethodExtensions;
 
 namespace JaySharp.Tests;
 
-[JayTestSuite(On = Is.Off)]
+[JayTestSuite(On = Is.On)]
 public static class ArrayTests
 {
     [JayTest]

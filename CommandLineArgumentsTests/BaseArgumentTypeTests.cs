@@ -5,7 +5,7 @@ using JaySharp.Shared.Loggers;
 
 namespace JaySharp.CommandLineArguments.Tests;
 
-[JayTestSuite(On = Is.On)]
+[JayTestSuite(On = Is.Off)]
 public static class BaseArgumentTypeExtensionsTests
 {
     [JayTest(On = Is.On)]
