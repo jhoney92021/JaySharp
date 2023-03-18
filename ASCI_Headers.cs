@@ -62,6 +62,19 @@ public static class ASCI_Headers
         @"                                                                             "+"\n";
     public static string ByBHiveTechnoligies_3D =         
          "                     A B-Hive Technologies Software  \n\n";
-                                                                                    
+
+    public static string JaySharp_3D = 
+        @"    ___  ________      ___    ___ ________  ___  ___  ________  ________  ________   "+"\n"+
+        @"   |\  \|\   __  \    |\  \  /  /|\   ____\|\  \|\  \|\   __  \|\   __  \|\   __  \  "+"\n"+
+        @"   \ \  \ \  \|\  \   \ \  \/  / | \  \___|\ \  \\\  \ \  \|\  \ \  \|\  \ \  \|\  \ "+"\n"+
+        @" __ \ \  \ \   __  \   \ \    / / \ \_____  \ \   __  \ \   __  \ \   _  _\ \   ____\"+"\n"+
+        @"|\  \\_\  \ \  \ \  \   \/  /  /   \|____|\  \ \  \ \  \ \  \ \  \ \  \\  \\ \  \___|"+"\n"+
+        @"\ \________\ \__\ \__\__/  / /       ____\_\  \ \__\ \__\ \__\ \__\ \__\\ _\\ \__\   "+"\n"+
+        @" \|________|\|__|\|__|\___/ /       |\_________\|__|\|__|\|__|\|__|\|__|\|__|\|__|   "+"\n"+
+        @"                     \|___|/        \|_________|                                     "+"\n"+
+        @"                                                                                     "+"\n";
+    public static string ByBHiveTechnoligies_JaySharp_3D =         
+        //  "                        A B-Hive Technologies Software  \n\n";
+         "                        A Honey Super Technologies Software  \n\n";
 
 }
