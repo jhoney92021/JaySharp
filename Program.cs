@@ -1,20 +1,32 @@
 ﻿using JaySharp.TestSuite.TestRunner;
 using JaySharp.Shared.Loggers;
 using JaySharp.CommandLineArguments;
+using System.Reflection;
 
 namespace JaySharp;
 
-class Program 
+public class Program 
 { 
-    static void Main(string[] args) 
-    {        
+    public static void Main(string[] args) 
+    {   
+        if(args.Contains("halp!"))
+        {
+            TestSettings.Halp = true;
+            foreach(var arg in args)     
+            {
+                JayLogger.PrintWithColor($"~~~ {arg} ~~~", ConsoleColor.Red);
+            }
+        }
         if(args.Contains("--JayTest")) 
         {
             // JayLogger.PrintWithColor(ASCI_Headers.JayTest_StarWars, ConsoleColor.Yellow);
             // JayLogger.PrintWithColor(ASCI_Headers.ByBHiveTechnoligies_StarWars, ConsoleColor.Red);
 
-            JayLogger.PrintWithColor(ASCI_Headers.JayTest_3D, ConsoleColor.Yellow);
-            JayLogger.PrintWithColor(ASCI_Headers.ByBHiveTechnoligies_3D, ConsoleColor.Red);
+            // JayLogger.PrintWithColor(ASCI_Headers.JayTest_3D, ConsoleColor.Yellow);
+            // JayLogger.PrintWithColor(ASCI_Headers.ByBHiveTechnoligies_3D, ConsoleColor.Red);
+
+            JayLogger.PrintWithColor(ASCI_Headers.JaySharp_3D, ConsoleColor.Blue);
+            JayLogger.PrintWithColor(ASCI_Headers.ByBHiveTechnoligies_JaySharp_3D, ConsoleColor.Red);
 
             // JayLogger.PrintWithColor(ASCI_Headers.JayTest_Murica, ConsoleColor.Blue);
             // JayLogger.PrintWithColor(ASCI_Headers.ByBHiveTechnoligies_Murica, ConsoleColor.Red);

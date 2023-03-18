@@ -9,15 +9,22 @@ public static partial class TestRunner
 {
     private static void GetTestSuites()
     {
-        if(Assembly != null)
+        if(TestSettings.Halp)
         {
-            TestSuitesToRun = GetTypesWithAttribute(Assembly, TestSuiteType);
+            JayLogger.PrintWithColor($"### ex {Assembly} ###", ConsoleColor.Yellow);
+            JayLogger.PrintWithColor($"### call {AssemblyToTest} ###", ConsoleColor.Yellow);
+            JayLogger.PrintWithColor($"### entry {AssemblyEntry} ###", ConsoleColor.Yellow);
+        }
+        if(AssemblyEntry != null)
+        {
+            TestSuitesToRun = GetTypesWithAttribute(AssemblyEntry, TestSuiteType);
             JayLogger.PrintIfVerbose($"~~ Retrieved {TestSuitesToRun.Count()} Test Suites ~~", ConsoleColor.Yellow);
         }
     }
 
     private static SuiteAndName[] GetTypesWithAttribute(Assembly assembly, Type attribute)
     {
+        if(TestSettings.ToTest != null){assembly=TestSettings.ToTest;}
         return assembly
                 .GetTypes()
                 .Where(type => type.GetCustomAttributes(attribute, true).Length > 0)
