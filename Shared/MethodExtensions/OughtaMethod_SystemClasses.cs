@@ -20,7 +20,7 @@ public static partial class OughtaMethod
     {        
         return (toEvaluate, false);
     }
-    public static (Dictionary<TKey,TValue>,bool) Oughta<TKey,TValue>(this Dictionary<TKey,TValue> toEvaluate)
+    public static (Dictionary<TKey,TValue>,bool) Oughta<TKey,TValue>(this Dictionary<TKey,TValue> toEvaluate) where TKey : notnull
     {        
         return (toEvaluate, false);
     }

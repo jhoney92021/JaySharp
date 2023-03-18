@@ -19,7 +19,7 @@ public static partial class MustMethod
     {        
         return (toEvaluate, true);
     }
-    public static (Dictionary<TKey,TValue>,bool) Must<TKey,TValue>(this Dictionary<TKey,TValue>  toEvaluate)
+    public static (Dictionary<TKey,TValue>,bool) Must<TKey,TValue>(this Dictionary<TKey,TValue>  toEvaluate) where TKey : notnull
     {        
         return (toEvaluate, true);
     }
