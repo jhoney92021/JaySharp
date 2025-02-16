@@ -37,19 +37,24 @@ public static partial class TestRunner
                     JayLogger.PrintIfVerbose($"~~ Running {currentSuiteName} ~~", ConsoleColor.Blue);
 
                 }
-                var method = methodAndSuiteName.Method;
+                // var method = methodAndSuiteName.Method;
                 try
                 {
                     if(ValidateTestIsOn(idx))
                     {
-                        var parameters = method.GetParameters();
+                        var parameters = methodAndSuiteName.Method.GetParameters();
                         try
                         {
-                            method.GetBaseDefinition().Invoke(null, parameters ?? null);
+                            methodAndSuiteName.Method.GetBaseDefinition().Invoke(null, parameters ?? null);
                         }
-                        catch
+                        catch(Exception exception)
                         {
                             TestsCompleted--;
+                            if(exception.InnerException is EvaluationException)
+                            {
+                                TestLogger.Exception(exception?.InnerException?.ToString(), methodAndSuiteName.TestName ?? methodAndSuiteName.Method.Name);
+                                continue;
+                            }
                         }
                         finally
                         {
@@ -65,7 +70,8 @@ public static partial class TestRunner
                     TestsCompleted--;
                     if(exception.InnerException is EvaluationException)
                     {
-                        TestLogger.Exception(exception?.InnerException?.ToString(), method.Name);
+                        TestLogger.Exception(exception?.InnerException?.ToString(), methodAndSuiteName.TestName ?? methodAndSuiteName.Method.Name);
+                        // TestLogger.Exception(exception?.InnerException?.ToString(), "unset");
                         continue;
                     }
                 }
@@ -81,7 +87,14 @@ public static partial class TestRunner
         return suite.Type
                 .GetMethods()
                 .Where(methodInfo=>methodInfo.GetCustomAttributes(attribute, true).Length > 0)
-                .Select(methodInfo => new MethodAndSuiteName{Method = methodInfo, SuiteName = suite.Name })
+                .Select(methodInfo => new MethodAndSuiteName{
+                    Method = methodInfo, 
+                    TestName = methodInfo                            
+                            .GetCustomAttributesData()
+                            .SelectMany(ad => ad.NamedArguments.Where(na => na.MemberName == "Name"))
+                            .FirstOrDefault().TypedValue.Value?.ToString() ?? "not found",
+                    SuiteName = suite.Name
+                    })
                 .ToArray();
     }
 

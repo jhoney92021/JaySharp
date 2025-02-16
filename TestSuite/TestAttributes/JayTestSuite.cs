@@ -12,6 +12,6 @@ public class JayTestSuite : Attribute
     {
         On = Is.On;
         StackTrace stackTrace = new StackTrace();
-        Name = stackTrace?.GetFrame(2)?.GetMethod()?.Name ?? "stack was null";
+        Name = stackTrace?.GetFrame(2)?.GetMethod()?.Name ?? "stack was null";        
     }
 }

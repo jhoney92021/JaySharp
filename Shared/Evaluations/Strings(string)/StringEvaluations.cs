@@ -10,11 +10,11 @@ public static class StringEvaluations
         {
             TestLogger.PassedInCyan();
         }
-        else if (toEvaluate.ThrowException)
+        if (toEvaluate.Value != toCompare && toEvaluate.ThrowException)
         {
             throw new StringEvaluationException($"Must have been {toEvaluate.Value} but was {toCompare}");
         }        
-        else
+        if (toEvaluate.Value != toCompare && !toEvaluate.ThrowException)
         {
             TestLogger.Failed($"Oughta been {toEvaluate.Value} but was {toCompare}");
         }

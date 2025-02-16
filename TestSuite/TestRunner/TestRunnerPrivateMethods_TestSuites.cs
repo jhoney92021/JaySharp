@@ -28,7 +28,14 @@ public static partial class TestRunner
         return assembly
                 .GetTypes()
                 .Where(type => type.GetCustomAttributes(attribute, true).Length > 0)
-                .Select(type => new SuiteAndName{Type = type, Name = type.Name })
+                .Select(type => new SuiteAndName{
+                    Type = type, 
+                    Name = type
+                            .GetCustomAttributesData()
+                            .SelectMany(ad => ad.NamedArguments.Where(na => na.MemberName == "Name"))
+                            .FirstOrDefault().TypedValue.Value?.ToString() 
+                            ?? type.Name 
+                })
                 .ToArray();
     }
 
