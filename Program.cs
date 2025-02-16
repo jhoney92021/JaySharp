@@ -1,6 +1,5 @@
-﻿using JaySharp.TestSuite.TestRunner;
-using JaySharp.Shared.Loggers;
-using JaySharp.CommandLineArguments;
+﻿using JaySharp.Shared.Loggers;
+using JaySharp.TestSuite.TestRunner;
 using System.Reflection;
 
 namespace JaySharp;

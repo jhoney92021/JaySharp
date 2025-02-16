@@ -29,7 +29,7 @@ public static class CharacterTests
     public static void CompareCharacters_Must_Be_Fail()
     {
         var underTest = 'q';
-        
+
         underTest.Must().Be('P');
     }
 }

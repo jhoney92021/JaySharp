@@ -1,6 +1,6 @@
 using JaySharp.Shared.Evaluations.Integers;
-using JaySharp.TestSuite.TestAttributes;
 using JaySharp.Shared.MethodExtensions;
+using JaySharp.TestSuite.TestAttributes;
 
 namespace JaySharp.Tests;
 

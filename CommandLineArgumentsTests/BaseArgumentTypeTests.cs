@@ -1,7 +1,6 @@
-using JaySharp.TestSuite.TestAttributes;
-using JaySharp.Shared.MethodExtensions;
 using JaySharp.Shared.Evaluations.Enum;
-using JaySharp.Shared.Loggers;
+using JaySharp.Shared.MethodExtensions;
+using JaySharp.TestSuite.TestAttributes;
 
 namespace JaySharp.CommandLineArguments.Tests;
 

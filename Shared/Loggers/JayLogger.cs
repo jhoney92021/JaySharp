@@ -1,5 +1,5 @@
-using System.Diagnostics;
 using JaySharp.TestSuite.TestRunner;
+using System.Diagnostics;
 
 namespace JaySharp.Shared.Loggers;
 
@@ -9,27 +9,27 @@ public class JayLogger
     {
         StackTrace stackTrace = new StackTrace();
         var calledTestMethod = stackTrace?.GetFrame(2)?.GetMethod()?.Name;
-        Console.ForegroundColor = ConsoleColor.Blue;        
+        Console.ForegroundColor = ConsoleColor.Blue;
         Console.WriteLine(toPrint);
-        Console.ForegroundColor = ConsoleColor.Gray;        
+        Console.ForegroundColor = ConsoleColor.Gray;
     }
     public static void PrintInRed(string toPrint)
     {
         StackTrace stackTrace = new StackTrace();
         var calledTestMethod = stackTrace?.GetFrame(2)?.GetMethod()?.Name;
-        Console.ForegroundColor = ConsoleColor.Blue;        
+        Console.ForegroundColor = ConsoleColor.Blue;
         Console.WriteLine(toPrint);
-        Console.ForegroundColor = ConsoleColor.Gray;        
+        Console.ForegroundColor = ConsoleColor.Gray;
     }
     public static void PrintWithColor(string toPrint, ConsoleColor printColor)
     {
-        Console.ForegroundColor = printColor;        
+        Console.ForegroundColor = printColor;
         Console.WriteLine(toPrint);
-        Console.ForegroundColor = ConsoleColor.Gray;        
+        Console.ForegroundColor = ConsoleColor.Gray;
     }
 
     public static void PrintIfVerbose(string toPrint, ConsoleColor colorToPrint)
     {
-        if(TestSettings.LogLevel == Loggers.LogLevel.Verbose) Loggers.JayLogger.PrintWithColor(toPrint,colorToPrint);
+        if (TestSettings.LogLevel == Loggers.LogLevel.Verbose) Loggers.JayLogger.PrintWithColor(toPrint, colorToPrint);
     }
 }

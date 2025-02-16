@@ -2,7 +2,7 @@ namespace JaySharp.CommandLineArguments;
 
 public class BaseArgument : Argument
 {
-    public BaseArgumentType ArgumentType {get;set;}
+    public BaseArgumentType ArgumentType { get; set; }
     public BaseArgument()
     {
         Value = string.Empty;

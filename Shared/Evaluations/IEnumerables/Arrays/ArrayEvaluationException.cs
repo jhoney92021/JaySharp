@@ -1,5 +1,5 @@
-using System.Runtime.Serialization;
 using JaySharp.Shared.Loggers;
+using System.Runtime.Serialization;
 
 namespace JaySharp.Shared.Evaluations.Lists;
 

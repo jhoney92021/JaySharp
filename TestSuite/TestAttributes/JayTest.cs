@@ -3,11 +3,11 @@ using System.Diagnostics;
 
 namespace JaySharp.TestSuite.TestAttributes;
 
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Property)] 
+[AttributeUsage(AttributeTargets.Method | AttributeTargets.Property)]
 public class JayTest : Attribute
 {
-    public string Name {get;set;} = "unset";
-    public Is On {get;set;} = Is.On;
+    public string Name { get; set; } = "unset";
+    public Is On { get; set; } = Is.On;
     public JayTest()
     {
         On = Is.On;
