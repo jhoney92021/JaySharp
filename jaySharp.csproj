@@ -6,9 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>JayTest</PackageId>
-    <Version>1.0.17</Version>
+    <Version>1.0.18</Version>
     <Authors>jhoney</Authors>
     <Company>b-hive</Company>
     <AssemblyName>jhoney</AssemblyName>
+
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>JayTest</ToolCommandName>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
   </PropertyGroup>
 </Project>

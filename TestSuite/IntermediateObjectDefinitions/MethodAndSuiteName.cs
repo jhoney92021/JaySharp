@@ -5,4 +5,5 @@ public struct MethodAndSuiteName
 {
     public MethodInfo Method;
     public string SuiteName;
+    public string? TestName;
 }

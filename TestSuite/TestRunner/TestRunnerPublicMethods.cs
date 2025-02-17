@@ -3,8 +3,8 @@ public static partial class TestRunner
 {
     public static void GetAndRunAllTestSuites()
     {
-        GetTestSuites(); 
-        GetTests(); 
-        RunTests(); 
+        GetTestSuites();
+        GetTests();
+        RunTests();
     }
 }

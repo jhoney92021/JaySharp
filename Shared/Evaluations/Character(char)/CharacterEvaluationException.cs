@@ -10,7 +10,7 @@ public class CharacterEvaluationException : EvaluationException
 
     public CharacterEvaluationException(string? message) : base(message)
     {
-        
+
     }
 
     public CharacterEvaluationException(string? message, Exception? innerException) : base(message, innerException)

@@ -2,26 +2,26 @@ using JaySharp.Shared.Evaluations.Type;
 
 namespace JaySharp.Shared.MethodExtensions;
 public static partial class OughtaMethod
-{ 
+{
     public static TypeEvaluation<T> Oughta<T>(this T toEvaluate)
-    { 
-        var typeEvaluation = new TypeEvaluation<T>(toEvaluate,false);       
+    {
+        var typeEvaluation = new TypeEvaluation<T>(toEvaluate, false);
         return typeEvaluation;
     }
-    public static (string,bool) Oughta(this string toEvaluate)
-    {        
+    public static (string, bool) Oughta(this string toEvaluate)
+    {
         return (toEvaluate, false);
     }
-    public static (T[],bool) Oughta<T>(this T[] toEvaluate)
-    {        
+    public static (T[], bool) Oughta<T>(this T[] toEvaluate)
+    {
         return (toEvaluate, false);
     }
-    public static (List<T>,bool) Oughta<T>(this List<T> toEvaluate)
-    {        
+    public static (List<T>, bool) Oughta<T>(this List<T> toEvaluate)
+    {
         return (toEvaluate, false);
     }
-    public static (Dictionary<TKey,TValue>,bool) Oughta<TKey,TValue>(this Dictionary<TKey,TValue> toEvaluate) where TKey : notnull
-    {        
+    public static (Dictionary<TKey, TValue>, bool) Oughta<TKey, TValue>(this Dictionary<TKey, TValue> toEvaluate) where TKey : notnull
+    {
         return (toEvaluate, false);
     }
 }

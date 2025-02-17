@@ -4,7 +4,7 @@ namespace JaySharp.Shared.Evaluations.Dictionaries;
 
 public static class DictionaryComparisonMessages
 {
-    public static Dictionary<IEnumerableComparisonMessageType,string> Messages =
+    public static Dictionary<IEnumerableComparisonMessageType, string> Messages =
                 new Dictionary<IEnumerableComparisonMessageType, string>
                 {
                     {IEnumerableComparisonMessageType.OughtaBeen, "\nOughta been { "},

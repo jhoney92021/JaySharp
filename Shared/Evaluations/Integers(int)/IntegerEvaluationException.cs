@@ -10,7 +10,7 @@ public class IntegerEvaluationException : EvaluationException
 
     public IntegerEvaluationException(string? message) : base(message)
     {
-        
+
     }
 
     public IntegerEvaluationException(string? message, Exception? innerException) : base(message, innerException)

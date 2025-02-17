@@ -10,7 +10,7 @@ public class TypeEvaluationException : EvaluationException
 
     public TypeEvaluationException(string? message) : base(message)
     {
-        
+
     }
 
     public TypeEvaluationException(string? message, Exception? innerException) : base(message, innerException)

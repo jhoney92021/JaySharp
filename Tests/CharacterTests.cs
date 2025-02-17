@@ -7,29 +7,29 @@ namespace JaySharp.Tests;
 [JayTestSuite(On = Is.Off)]
 public static class CharacterTests
 {
-    [JayTest("CompareCharacters")]
+    [JayTest(Name = "CompareCharacters")]
     public static void CompareCharacters()
     {
         var underTest = 'p';
         underTest.Oughta().Be('p');
     }
-    [JayTest("CompareCharacters_Fail")]
+    [JayTest(Name = "CompareCharacters_Fail")]
     public static void CompareCharacters_Fail()
     {
         var underTest = 'p';
         underTest.Oughta().Be('Q');
     }
-    [JayTest("CompareCharacters_Must_Be")]
+    [JayTest(Name = "CompareCharacters_Must_Be")]
     public static void CompareCharacters_Must_Be()
     {
         var underTest = '1';
         underTest.Must().Be('1');
     }
-    [JayTest("CompareCharacters_Must_Be_Fail", On = Is.Off)]
+    [JayTest(Name = "CompareCharacters_Must_Be_Fail", On = Is.Off)]
     public static void CompareCharacters_Must_Be_Fail()
     {
         var underTest = 'q';
-        
+
         underTest.Must().Be('P');
     }
 }

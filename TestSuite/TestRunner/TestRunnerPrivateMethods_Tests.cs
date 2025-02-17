@@ -1,6 +1,6 @@
+using JaySharp.Shared.Evaluations;
 using JaySharp.Shared.Loggers;
 using JaySharp.TestSuite.IntermediateObjectDefinitions;
-using JaySharp.Shared.Evaluations;
 using JaySharp.TestSuite.TestAttributes;
 
 namespace JaySharp.TestSuite.TestRunner;
@@ -9,13 +9,13 @@ public static partial class TestRunner
 {
     private static void GetTests()
     {
-        if(TestSuitesToRun != null)
+        if (TestSuitesToRun != null)
         {
             int idx = 0;
             TestsToRun = new List<MethodAndSuiteName>();
-            foreach(var suite in TestSuitesToRun)
-            {                
-                if(ValidateSuiteIsOn(idx)) TestsToRun.AddRange(GetMethodsWithAttribute(suite, TestType));  
+            foreach (var suite in TestSuitesToRun)
+            {
+                if (ValidateSuiteIsOn(idx)) TestsToRun.AddRange(GetMethodsWithAttribute(suite, TestType));
                 TestsSuitesStarted++;
                 idx++;
             }
@@ -25,31 +25,36 @@ public static partial class TestRunner
 
     private static void RunTests()
     {
-        if(TestsToRun != null)
+        if (TestsToRun != null)
         {
             string currentSuiteName = string.Empty;
             int idx = 0;
-            foreach(var methodAndSuiteName in TestsToRun)
+            foreach (var methodAndSuiteName in TestsToRun)
             {
-                if(currentSuiteName != methodAndSuiteName.SuiteName || string.IsNullOrEmpty(currentSuiteName))
+                if (currentSuiteName != methodAndSuiteName.SuiteName || string.IsNullOrEmpty(currentSuiteName))
                 {
                     currentSuiteName = methodAndSuiteName.SuiteName;
                     JayLogger.PrintIfVerbose($"~~ Running {currentSuiteName} ~~", ConsoleColor.Blue);
 
                 }
-                var method = methodAndSuiteName.Method;
+                // var method = methodAndSuiteName.Method;
                 try
                 {
-                    if(ValidateTestIsOn(idx))
+                    if (ValidateTestIsOn(idx))
                     {
-                        var parameters = method.GetParameters();
+                        var parameters = methodAndSuiteName.Method.GetParameters();
                         try
                         {
-                            method.GetBaseDefinition().Invoke(null, parameters ?? null);
+                            methodAndSuiteName.Method.GetBaseDefinition().Invoke(null, parameters ?? null);
                         }
-                        catch
+                        catch (Exception exception)
                         {
                             TestsCompleted--;
+                            if (exception.InnerException is EvaluationException)
+                            {
+                                TestLogger.Exception(exception?.InnerException?.ToString(), methodAndSuiteName.TestName ?? methodAndSuiteName.Method.Name);
+                                continue;
+                            }
                         }
                         finally
                         {
@@ -59,17 +64,18 @@ public static partial class TestRunner
                     idx++;
                     TestsStarted++;
                 }
-                catch(Exception exception)
+                catch (Exception exception)
                 {
                     TestsStarted--;
                     TestsCompleted--;
-                    if(exception.InnerException is EvaluationException)
+                    if (exception.InnerException is EvaluationException)
                     {
-                        TestLogger.Exception(exception?.InnerException?.ToString(), method.Name);
+                        TestLogger.Exception(exception?.InnerException?.ToString(), methodAndSuiteName.TestName ?? methodAndSuiteName.Method.Name);
+                        // TestLogger.Exception(exception?.InnerException?.ToString(), "unset");
                         continue;
                     }
                 }
-            } 
+            }
             JayLogger.PrintIfVerbose($"|| {TestsSuitesStarted} Tests Suites Started ||", ConsoleColor.Gray);
             JayLogger.PrintIfVerbose($"|| {TestsStarted} Tests Started       ||", ConsoleColor.Gray);
             JayLogger.PrintIfVerbose($"|| {TestsCompleted} Tests Completed     ||", ConsoleColor.Gray);
@@ -80,25 +86,33 @@ public static partial class TestRunner
     {
         return suite.Type
                 .GetMethods()
-                .Where(methodInfo=>methodInfo.GetCustomAttributes(attribute, true).Length > 0)
-                .Select(methodInfo => new MethodAndSuiteName{Method = methodInfo, SuiteName = suite.Name })
+                .Where(methodInfo => methodInfo.GetCustomAttributes(attribute, true).Length > 0)
+                .Select(methodInfo => new MethodAndSuiteName
+                {
+                    Method = methodInfo,
+                    TestName = methodInfo
+                            .GetCustomAttributesData()
+                            .SelectMany(ad => ad.NamedArguments.Where(na => na.MemberName == "Name"))
+                            .FirstOrDefault().TypedValue.Value?.ToString() ?? "not found",
+                    SuiteName = suite.Name
+                })
                 .ToArray();
     }
 
     private static bool ValidateTestIsOn(int idx)
     {
-        if(TestsToRun == null) return false;
-        if(TestsToRun.Count() > idx)
+        if (TestsToRun == null) return false;
+        if (TestsToRun.Count() > idx)
         {
-            if(TestSettings.RunAllTests){return true;}
-            
+            if (TestSettings.RunAllTests) { return true; }
+
             var attributeData = TestsToRun[idx].Method.GetCustomAttributesData();
-            
+
             var namedArguments = attributeData
                     .SelectMany(anon => anon.NamedArguments)
-                    .Where(anon => anon.MemberName == "On");         
-            
-            return !namedArguments.Any(na => na.TypedValue.Value?.ToString() == ((int)Is.Off).ToString());            
+                    .Where(anon => anon.MemberName == "On");
+
+            return !namedArguments.Any(na => na.TypedValue.Value?.ToString() == ((int)Is.Off).ToString());
         }
 
         return false;
