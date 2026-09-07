@@ -17,22 +17,26 @@ JaySharp includes built-in attribute aliases in `JaySharp.Compatibility`. You ca
 
 ### 2. Example Drop-In Usage
 ```csharp
-using JaySharp.Compatibility;               // Import xUnit/NUnit/MSTest attribute aliases
-using JaySharp.Shared.MethodExtensions;    // Import .Must() and .Oughta() assertions
+using JaySharp.Compatibility;                            // Import xUnit/NUnit/MSTest attribute aliases
+using JaySharp.Compatibility.FluentAssertions;         // Opt-in .Should().Be(...) extensions
+using JaySharp.Compatibility.Shouldly;                  // Opt-in .ShouldBe(...) extensions
 
 [TestClass]
 public static class LegacyUnitTests
 {
     [Fact]
-    public static void Fact_Example() => 42.Must().Be(42);
+    public static void Fact_Example() => 42.Should().Be(42);
 
     [Test]
-    public static void NUnitTest_Example() => "JaySharp".Must().Be("JaySharp");
+    public static void NUnitTest_Example() => "JaySharp".ShouldBe("JaySharp");
 
     [TestMethod]
     public static void MSTest_Example() => true.Must().Be(true);
 }
 ```
+
+> [!NOTE]
+> Assertion aliases (`.Should()` and `.ShouldBe()`) are scoped in isolated `JaySharp.Compatibility.FluentAssertions` and `JaySharp.Compatibility.Shouldly` namespaces. This prevents any extension method resolution conflicts if your project also references third-party `FluentAssertions` or `Shouldly` packages.
 
 ---
 

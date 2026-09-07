@@ -1,10 +1,10 @@
-# 🚀 JaySharp Feature Roadmap & Plan
+# JaySharp Feature Roadmap & Plan
 
 This document outlines planned features and architectural enhancements for JaySharp—a defensive programming, assertion, and testing library for C#.
 
 ---
 
-## 🎯 Priority Feature 1: Junk Test & Anti-Cruft Detector (`JunkTestDetector`)
+## Priority Feature 1: Junk Test & Anti-Cruft Detector (`JunkTestDetector`)
 
 ### Problem
 In large codebases, developers often write "junk tests"—test methods decorated with `[JayTest]` that execute code but make no actual assertions, compare trivial hardcoded literals, or remain disabled indefinitely.
@@ -21,7 +21,7 @@ An automated linter and runtime analyzer that detects:
 
 ---
 
-## ⏱️ Feature 2: Performance Budget Assertions (`[JayBenchmark]`, `CompleteWithin`)
+## Feature 2: Performance Budget Assertions (`[JayBenchmark]`, `CompleteWithin`)
 
 ### Capabilities
 - **Method Execution Budget**: `(action).Oughta().CompleteWithin(TimeSpan.FromMilliseconds(50))`
@@ -30,7 +30,7 @@ An automated linter and runtime analyzer that detects:
 
 ---
 
-## 🔍 Feature 3: Structural Diff Visualizer for Failed Collections & Objects
+## Feature 3: Structural Diff Visualizer for Failed Collections & Objects
 
 ### Capabilities
 - When a `List`, `Dictionary`, `Array`, or complex `Type` comparison fails, format a side-by-side **Glyphed Delta View** in terminal output:
@@ -43,7 +43,7 @@ An automated linter and runtime analyzer that detects:
 
 ---
 
-## 🔄 Feature 4: Live Watcher Mode (`jaysharp watch` / `make watch`)
+## Feature 4: Live Watcher Mode (`jaysharp watch` / `make watch`)
 
 ### Capabilities
 - Add a file-system watcher CLI option (`jaysharp -Watch` or `make watch`).
@@ -51,7 +51,7 @@ An automated linter and runtime analyzer that detects:
 
 ---
 
-## 📄 Feature 5: Markdown & HTML CI/CD Test & Policy Report Generator
+## Feature 5: Markdown & HTML CI/CD Test & Policy Report Generator
 
 ### Capabilities
 - `jaysharp -Report html` or `jaysharp -Report markdown`
@@ -59,7 +59,7 @@ An automated linter and runtime analyzer that detects:
 
 ---
 
-## 🛡️ Feature 6: Fluent Defensive Guard Chains
+## Feature 6: Fluent Defensive Guard Chains
 
 ### Capabilities
 - Expand assertion methods for common defensive programming scenarios:
@@ -70,14 +70,14 @@ An automated linter and runtime analyzer that detects:
 
 ---
 
-## ⚙️ Feature 7: GitHub Actions CI Generator (`jaysharp --init-ci`)
+## Feature 7: GitHub Actions CI Generator (`jaysharp --init-ci`)
 
 ### Capabilities
 - Command `jaysharp --init-ci` that generates `.github/workflows/jaysharp.yml` pre-configured to run `make build`, `make enforce`, and `make test` on every pull request.
 
 ---
 
-## 📋 Feature 8: Feature Gap & Migration Roadmap Audit
+## Feature 8: Feature Gap & Migration Roadmap Audit
 
 ### 1. `async Task` Test Execution (Completed)
 - **Status:** Integrated into `JaySharp.Core`.
