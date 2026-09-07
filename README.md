@@ -156,6 +156,10 @@ When invoking `JaySharp` CLI:
 | `-AllTests` | Enables execution of all discovered test methods |
 | `-Lint` | Runs the static code quality & junk test detector |
 | `-ExplicitVar` | Enforces explicit type declarations over `var` during linting |
+| `-DetectDeadCode` | Analyzes assembly source files for uncalled helper methods and unread fields |
+| `-Hotfix` | Runs Tier 1 (Showstoppers) + Tier 2 (Hard Invariants) tests, skipping low-priority advisory tests |
+| `-Showstoppers` | Runs Tier 1 critical infrastructure sanity tests only |
+| `-Nightly` | Deep execution mode running all tests, full linter audit, and exporting HTML/JUnit reports |
 | `-AllLogs` | Sets verbose log output level |
 | `-version` | Displays assembly version |
 | `-halp` | Prints diagnostic / debug assembly information |

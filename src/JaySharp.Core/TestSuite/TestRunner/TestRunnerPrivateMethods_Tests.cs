@@ -45,7 +45,11 @@ public static partial class TestRunner
                         ParameterInfo[] parameters = testItem.Method.GetParameters();
                         try
                         {
-                            testItem.Method.GetBaseDefinition().Invoke(null, parameters);
+                            object? invocationResult = testItem.Method.GetBaseDefinition().Invoke(null, parameters);
+                            if (invocationResult is Task task)
+                            {
+                                task.GetAwaiter().GetResult();
+                            }
                         }
                         catch (Exception exception)
                         {

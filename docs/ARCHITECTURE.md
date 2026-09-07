@@ -36,6 +36,18 @@ JaySharp/
   * **Feature Tagging (`[JayFeature("FeatureName")]`):** Selective execution mode using `-Feature <Name>` to isolate tests belonging to specific functional features.
 * **Test Metadata:** Attributes support an explicit `Description` property (`[JayTest(Description = "...")]`) that is displayed alongside execution outputs.
 
+| **Feature Tag** | `[JayFeature("Name")]` | — | — | — |
+| **Parameterized Scenario** | `[JayScenario(arg1, arg2)]` | `[InlineData]` | `[TestCase]` | `[DataRow]` |
+| **Showstopper Circuit Breaker** | `[JayShowstopper]` | — | — | — |
+
+* **Priority-Ordered Execution Pipeline:**
+  1. **Tier 1 (Showstopper `[JayShowstopper]`):** Critical infrastructure sanity tests. If a showstopper fails, the engine triggers a circuit breaker to halt execution immediately.
+  2. **Tier 2 (Standard Hard Invariants `.Must()`):** Core domain and business rule tests.
+  3. **Tier 3 (Advisory `.Oughta()`):** Soft warning checks and performance budget assertions.
+* **Execution Modes:**
+  * **Hotfix Mode (`-Hotfix`):** Runs Tier 1 + Tier 2 tests only, skipping low-priority advisory tests for rapid production hotfixes.
+  * **Nightly Mode (`-Nightly`):** Runs all tests (`-AllSuites -AllTests`), full code policy linter (`-Lint -ExplicitVar`), and exports visual HTML & JUnit XML reports to `./reports/`.
+
 ### B. Dual-Tier Assertion Model (`Must()` vs `Oughta()`)
 JaySharp introduces a two-tier evaluation model for test assertions:
 
@@ -50,6 +62,7 @@ JaySharp includes a built-in static analysis engine to prevent low-value or "jun
 2. **`TautologicalAssertion`:** Detects useless literal self-assertions (e.g. `"A".Must().Be("A")` or `10.Oughta().Be(10)`).
 3. **`DisabledTestCruft`:** Flagged when tests are explicitly turned off (`[JayTest(On = Is.Off)]`) without clean removal.
 4. **`EnforceExplicitVar`:** Configurable code style policy prohibiting implicit `var` declarations in favor of strong static typing.
+5. **`DeadCodeDetector`:** Scans source files for uncalled private/internal helper methods, unread fields/constants, and orphaned unreachable code paths.
 
 ### D. Tag Glyphs & Visual Output System (`Glyphes`)
 All console log tags across JaySharp are centralized in `Glyphes.cs`:
@@ -133,3 +146,30 @@ If NuGet package managers or local feeds are unavailable or restricted in offlin
   </Reference>
 </ItemGroup>
 ```
+
+---
+
+## 6. DB & API Testing Helpers (`JaySharp.Testing`)
+
+JaySharp includes lightweight, zero-dependency testing helpers to solve the #1 and #2 pain points in real-world testing (isolating database and API calls):
+
+* **HTTP / API Mock Helper (`JayHttpClient`):** Constructs a mock `HttpClient` returning canned JSON or string responses without making live network calls:
+```csharp
+HttpClient client = JayHttpClient.Create("{\"name\":\"Tama\",\"hunger\":30}");
+```
+* **In-Memory Repository Container (`FakeRepository<TKey, TEntity>`):** Thread-safe in-memory CRUD storage for mocking database entities without live DB connections:
+```csharp
+FakeRepository<int, Pet> fakeDb = new();
+fakeDb.Add(1, new Pet("Tama"));
+```
+
+---
+
+## 7. Reflection Power Utilities Roadmap (`Reflect`)
+
+JaySharp's reflection engine provides high-productivity testing utilities:
+
+* **Automatic Dummy Data Seeder (`Reflect.CreateDummy<T>()`):** Auto-populates object graphs with typed dummy data for instant test fixture setup.
+* **Private State Inspection (`Reflect.GetPrivateField`):** Inspects/sets private encapsulated fields during legacy code refactoring.
+* **Auto-Interface Stubber (`Reflect.CreateStub<T>()`):** Instantiates lightweight default interface stubs.
+* **Architectural Invariants (`Reflect.EnforceArchitecture()`):** Validates solution architecture rules (sealed DTOs, namespace boundaries).
