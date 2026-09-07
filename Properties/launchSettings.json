@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "jaySharp": {
-      "commandName": "Project",
-      "commandLineArgs": "--JayTest -RunTests -AllLogs -AllTests"
-    }
-  }
-}

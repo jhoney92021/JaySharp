@@ -1,75 +1,85 @@
-# Jay Test Suite -- README #
+# JaySharp #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+JaySharp is a lightweight C# unit testing framework and runner offering dual application shells: a terminal **CLI** runner and a **Blazor WebAssembly PWA** dashboard interface.
 
-### Quick Links ###
-* [JaySharp Testing Docs](#jaySharp_testing_docs)
-* [JaySharp CLI Commands](#jaySharp_cli_commands)
-* [Git CLI Commands](#git_cli_commands)
-* [DotNet CLI Commands](#dotnet_cli_commands)
-* [EF Migrations CLI Commands](#ef_migrations_cli_commands)
-* [Sql Lite](#sql_lite_commands)
-
-### What is this repository for? ###
-
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
-
-### DotNet CLI Commands ###
-* dotnet run   --runs a project
-* dotnet clean  --cleans a project
-* dotnet build  --builds a project (there are options for verbosity like -v d[etailed])
-* dotnet watch run --runs a project while also listening for changes to files (can edit code while in a persistant run mode)
-<a name="dotnet_cli_commands"></a>
-
-### Git CLI Commands ###
-* stashing
-    - apply stash@{stash_index}
-    - git stash apply (shortcut for git stash apply stash@{0})
-    - git stash apply stash@{0} /*apply most 
-<a name="git_cli_commands"></a>
-
-# Testing Documentation #
-<a name="jaySharp_testing_docs"></a>
-## Abstracts ##
 ---
-### Base Extensions ###
-- OughtTo
-- Must
-### Base Modifiers ###
-- Be
-- Exist
-- Occur
-- Wait
-- Persist
 
-# JaySharp -- CLI Commands #
-* dotnet run -- JaySharp 
-    - base for all JaySharp cli commands
-* dotnet run -- JaySharp version
-    - returns version of JaySharp
-* dotnet run -- JayShard RunTests
-    - runs all the tests/suites tagged with JaySharp
-<a name="jaySharp_cli_commands"></a>
+## Repository Architecture ##
+
+```
+JaySharp/
+├── src/
+│   ├── JaySharp.Core/        # Core Test Runner Engine & Assertions (.NET 10)
+│   ├── JaySharp.Cli/         # Console CLI Application Shell (.NET 10)
+│   └── JaySharp.Web/         # Blazor WebAssembly PWA App Shell (.NET 10)
+├── tests/
+│   └── JaySharp.Tests/       # Internal / Example Test Suite (.NET 10)
+├── Makefile                  # Task runner for Linux / macOS
+├── jaysharp                  # Executable bash CLI wrapper
+└── jaysharp.ps1              # Task runner script for Windows PowerShell
+```
+
+---
+
+## Quick Start & Task Runners ##
+
+### Linux / CachyOS / macOS (`Makefile` & `./jaysharp`)
+
+Using `make`:
+```bash
+make test               # Run all test suites
+make build              # Build solution (JaySharp.sln)
+make version            # Display JaySharp CLI version
+make run ARGS="-halp"   # Pass custom CLI flags
+make pack               # Package NuGet tool to ./nupkg
+make clean              # Clean build artifacts
+```
+
+Using the `./jaysharp` executable wrapper:
+```bash
+./jaysharp -RunTests -AllSuites -AllTests
+./jaysharp -version
+./jaysharp -halp
+```
+
+### Windows PowerShell (`jaysharp.ps1`)
+
+```powershell
+.\jaysharp.ps1 test               # Run all test suites
+.\jaysharp.ps1 build              # Build solution (JaySharp.sln)
+.\jaysharp.ps1 version            # Display JaySharp CLI version
+.\jaysharp.ps1 run -halp          # Pass custom CLI flags
+.\jaysharp.ps1 pack               # Package NuGet tool to ./nupkg
+.\jaysharp.ps1 clean              # Clean build artifacts
+```
+
+---
+
+## JaySharp CLI Arguments ##
+
+When invoking `JaySharp` via `dotnet run --project src/JaySharp.Cli --`:
+
+| Command / Flag | Description |
+| :--- | :--- |
+| `--JaySharp` | Base CLI entry flag |
+| `-RunTests` | Triggers test execution |
+| `-AllSuites` | Enables execution of all discovered test suites |
+| `-AllTests` | Enables execution of all discovered test methods |
+| `-AllLogs` | Sets verbose log output level |
+| `-version` | Displays assembly version |
+| `-halp` | Prints diagnostic / debug assembly information |
+
+---
+
+## Web App Shell (`JaySharp.Web`) ##
+
+To launch the Blazor WASM PWA dashboard interface:
+
+```bash
+dotnet run --project src/JaySharp.Web
+```
+
+---
+
+## License & Authors ##
+Developed by **SpectacledJay** (jhoney).

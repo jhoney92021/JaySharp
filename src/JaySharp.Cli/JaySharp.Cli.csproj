@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageId>JaySharp.Cli</PackageId>
+    <Version>1.0.18</Version>
+    <Authors>jhoney</Authors>
+    <Company>SpectacledJay</Company>
+    <AssemblyName>JaySharp</AssemblyName>
+
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>JaySharp</ToolCommandName>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JaySharp.Core\JaySharp.Core.csproj" />
+    <ProjectReference Include="..\..\tests\JaySharp.Tests\JaySharp.Tests.csproj" />
+  </ItemGroup>
+
+</Project>
