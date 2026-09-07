@@ -1,5 +1,19 @@
-/Debug
-/obj
-/obj
-/bin
-.vscode
+# Build results
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+nupkg/
+
+# IDE and tooling
+.vs/
+.vscode/
+.kateproject*
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# OS generated files
+.DS_Store
+Thumbs.db

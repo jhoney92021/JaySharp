@@ -1,0 +1,35 @@
+using JaySharp.Shared.Evaluations.Characters;
+using JaySharp.Shared.MethodExtensions;
+using JaySharp.TestSuite.TestAttributes;
+
+namespace JaySharp.Tests;
+
+[JayTestSuite(On = Is.Off)]
+public static class CharacterTests
+{
+    [JayTest(Name = "CompareCharacters")]
+    public static void CompareCharacters()
+    {
+        var underTest = 'p';
+        underTest.Oughta().Be('p');
+    }
+    [JayTest(Name = "CompareCharacters_Fail")]
+    public static void CompareCharacters_Fail()
+    {
+        var underTest = 'p';
+        underTest.Oughta().Be('Q');
+    }
+    [JayTest(Name = "CompareCharacters_Must_Be")]
+    public static void CompareCharacters_Must_Be()
+    {
+        var underTest = '1';
+        underTest.Must().Be('1');
+    }
+    [JayTest(Name = "CompareCharacters_Must_Be_Fail", On = Is.Off)]
+    public static void CompareCharacters_Must_Be_Fail()
+    {
+        var underTest = 'q';
+
+        underTest.Must().Be('P');
+    }
+}
