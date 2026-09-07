@@ -23,6 +23,18 @@ public static class TestLogger
     }
 
     /// <summary>
+    /// Logs a soft warning message in Yellow formatted with the warning glyph tag.
+    /// </summary>
+    /// <param name="warningReason">Details of the soft warning.</param>
+    public static void Warning(string? warningReason)
+    {
+        string callerName = new StackTrace().GetCallerMethodName();
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine(Glyphes.Warning($"{callerName} -- warning -- {warningReason}"));
+        Console.ForegroundColor = ConsoleColor.Gray;
+    }
+
+    /// <summary>
     /// Logs a test failure message in Red formatted with the fail glyph tag.
     /// </summary>
     /// <param name="failureReason">Details of the failure.</param>

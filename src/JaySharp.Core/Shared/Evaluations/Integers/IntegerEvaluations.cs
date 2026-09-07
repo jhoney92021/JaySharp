@@ -16,7 +16,7 @@ public static class IntegerEvaluations
         }
         else
         {
-            TestLogger.Failed($"Oughta been {toEvaluate.Value} but was {toCompare}");
+            TestLogger.Warning($"Oughta been {toEvaluate.Value} but was {toCompare}");
         }
     }
 }

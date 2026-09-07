@@ -1,4 +1,6 @@
 using JaySharp.Compatibility;
+using JaySharp.Compatibility.FluentAssertions;
+using JaySharp.Compatibility.Shouldly;
 using JaySharp.Shared.Evaluations.Boolean;
 using JaySharp.Shared.Evaluations.Integers;
 using JaySharp.Shared.Evaluations.Strings;
@@ -33,5 +35,28 @@ public static class CompatibilityTests
     {
         bool isAwesome = true;
         isAwesome.Must().Be(true);
+    }
+
+    [Fact(On = Is.On)]
+    public static void FluentAssertions_Should_Be_ExecutesCleanly()
+    {
+        int value = 100;
+        value.Should().Be(100);
+
+        string title = "JaySharp";
+        title.Should().Be("JaySharp");
+    }
+
+    [Fact(On = Is.On)]
+    public static void Shouldly_ShouldBe_ExecutesCleanly()
+    {
+        int value = 100;
+        value.ShouldBe(100);
+
+        string title = "JaySharp";
+        title.ShouldBe("JaySharp");
+
+        bool isTrue = true;
+        isTrue.ShouldBeTrue();
     }
 }

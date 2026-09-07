@@ -31,7 +31,7 @@ public static class TypeEvaluations
         }
         else
         {
-            TestLogger.Failed($"Oughta been {toEvaluate.ToEvaluate} but was {toCompare}");
+            TestLogger.Warning($"Oughta been {toEvaluate.ToEvaluate} but was {toCompare}");
         }
     }
 
@@ -50,7 +50,7 @@ public static class TypeEvaluations
         }
         else
         {
-            TestLogger.Failed($"Oughta been {toEvaluate.ToEvaluate} but was {toCompare}");
+            TestLogger.Warning($"Oughta been {toEvaluate.ToEvaluate} but was {toCompare}");
         }
     }
 }

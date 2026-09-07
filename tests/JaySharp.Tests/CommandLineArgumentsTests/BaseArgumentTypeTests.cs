@@ -4,7 +4,7 @@ using JaySharp.TestSuite.TestAttributes;
 
 namespace JaySharp.CommandLineArguments.Tests;
 
-[JayTestSuite(On = Is.Off)]
+[JayTestSuite(On = Is.On)]
 public static class BaseArgumentTypeExtensionsTests
 {
     [JayTest(On = Is.On)]

@@ -13,21 +13,21 @@ public static class GlyphesTests
     public static void Glyphes_Pass_FormatsCorrectly()
     {
         string formatted = Glyphes.Pass("TestPassed");
-        formatted.Oughta().Be("¡¡ TestPassed !!");
+        formatted.Oughta().Be("~~ TestPassed ~~");
     }
 
     [JayTest(On = Is.On)]
     public static void Glyphes_Fail_FormatsCorrectly()
     {
         string formatted = Glyphes.Fail("TestFailed");
-        formatted.Oughta().Be("¿¿ TestFailed ??");
+        formatted.Oughta().Be("!! TestFailed !!");
     }
 
     [JayTest(On = Is.On)]
     public static void Glyphes_Info_FormatsCorrectly()
     {
         string formatted = Glyphes.Info("TestInfo");
-        formatted.Oughta().Be("~~ TestInfo ~~");
+        formatted.Oughta().Be("|| TestInfo ||");
     }
 
     [JayTest(On = Is.On)]

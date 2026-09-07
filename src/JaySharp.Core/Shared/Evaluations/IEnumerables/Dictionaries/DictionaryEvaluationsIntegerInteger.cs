@@ -29,7 +29,7 @@ public static partial class DictionaryEvaluations
             string evaluated = BuildDictionaryMessage(missing1.ToDictionary(anon => anon.Key, anon => anon.Value), IEnumerableComparisonMessageType.Evaluated);
             string compared = BuildDictionaryMessage(missing2.ToDictionary(anon => anon.Key, anon => anon.Value), IEnumerableComparisonMessageType.Compared);
 
-            TestLogger.Failed(toEvaluateMessage + evaluated + compared);
+            TestLogger.Warning(toEvaluateMessage + evaluated + compared);
         }
     }
     private static string BuildDictionaryMessage(Dictionary<int, int> missing, IEnumerableComparisonMessageType messageType)

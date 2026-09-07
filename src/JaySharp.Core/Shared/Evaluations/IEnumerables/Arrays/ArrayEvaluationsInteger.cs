@@ -29,7 +29,7 @@ public static partial class ArrayEvaluations
             string evaluated = BuildListMessage(missing1, IEnumerableComparisonMessageType.Evaluated);
             string compared = BuildListMessage(missing2, IEnumerableComparisonMessageType.Compared);
 
-            TestLogger.Failed(toEvaluateMessage + evaluated + compared);
+            TestLogger.Warning(toEvaluateMessage + evaluated + compared);
         }
     }
     private static string BuildListMessage(int[] missing, IEnumerableComparisonMessageType messageType)

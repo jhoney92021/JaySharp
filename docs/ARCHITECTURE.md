@@ -67,9 +67,9 @@ JaySharp includes a built-in static analysis engine to prevent low-value or "jun
 ### D. Tag Glyphs & Visual Output System (`Glyphes`)
 All console log tags across JaySharp are centralized in `Glyphes.cs`:
 
-* `¡¡` (`Glyphes.PassTag`) - Passed assertions & tests (Cyan)
+* `~~` (`Glyphes.PassTag`) - Passed assertions & tests (Cyan)
 * `¿¿` (`Glyphes.WarnTag`) - Soft `Oughta` warnings (Yellow)
-* `~~` (`Glyphes.FailTag`) - Hard `Must` test failures (Red)
+* `!!` (`Glyphes.FailTag`) - Hard `Must` test failures & exceptions (Red)
 * `||` (`Glyphes.InfoTag`) - CLI headers & section dividers (Blue)
 
 ---
