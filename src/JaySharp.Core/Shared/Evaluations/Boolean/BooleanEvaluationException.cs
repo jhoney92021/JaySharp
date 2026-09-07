@@ -1,5 +1,4 @@
 using JaySharp.Shared.Loggers;
-using System.Runtime.Serialization;
 
 namespace JaySharp.Shared.Evaluations.Boolean;
 
@@ -17,9 +16,5 @@ public class BooleanEvaluationException : Exception
     public BooleanEvaluationException(string? message, Exception? innerException) : base(message, innerException)
     {
         TestLogger.Failed(message);
-    }
-
-    protected BooleanEvaluationException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
     }
 }

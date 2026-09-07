@@ -1,5 +1,4 @@
 using JaySharp.Shared.Loggers;
-using System.Runtime.Serialization;
 
 namespace JaySharp.Shared.Evaluations.Dictionaries;
 
@@ -17,9 +16,5 @@ public class DictionaryEvaluationException : EvaluationException
     public DictionaryEvaluationException(string? message, Exception? innerException) : base(message, innerException)
     {
         TestLogger.Failed(message);
-    }
-
-    protected DictionaryEvaluationException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
     }
 }

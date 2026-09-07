@@ -1,5 +1,4 @@
 using JaySharp.Shared.Loggers;
-using System.Runtime.Serialization;
 
 namespace JaySharp.Shared.Evaluations.Lists;
 
@@ -17,9 +16,5 @@ public class ArrayEvaluationException : EvaluationException
     public ArrayEvaluationException(string? message, Exception? innerException) : base(message, innerException)
     {
         TestLogger.Failed(message);
-    }
-
-    protected ArrayEvaluationException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
     }
 }

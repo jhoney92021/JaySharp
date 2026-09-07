@@ -1,7 +1,8 @@
+using System.Reflection;
+using JaySharp.FeatureFlagging.Attributes;
 using JaySharp.Shared.Evaluations;
 using JaySharp.Shared.Loggers;
 using JaySharp.TestSuite.IntermediateObjectDefinitions;
-using JaySharp.TestSuite.TestAttributes;
 
 namespace JaySharp.TestSuite.TestRunner;
 
@@ -11,15 +12,15 @@ public static partial class TestRunner
     {
         if (TestSuitesToRun != null)
         {
-            int idx = 0;
+            int index = 0;
             TestsToRun = new List<MethodAndSuiteName>();
-            foreach (var suite in TestSuitesToRun)
+            foreach (SuiteAndName suite in TestSuitesToRun)
             {
-                if (ValidateSuiteIsOn(idx)) TestsToRun.AddRange(GetMethodsWithAttribute(suite, TestType));
+                if (ValidateSuiteIsOn(index)) TestsToRun.AddRange(GetMethodsWithAttribute(suite, TestType));
                 TestsSuitesStarted++;
-                idx++;
+                index++;
             }
-            JayLogger.PrintIfVerbose($"~~ Retrieved {TestsToRun.Count()} Tests ~~", ConsoleColor.Yellow);
+            JayLogger.PrintIfVerbose(Glyphes.Info($"Retrieved {TestsToRun.Count} Tests"), ConsoleColor.Yellow);
         }
     }
 
@@ -28,31 +29,31 @@ public static partial class TestRunner
         if (TestsToRun != null)
         {
             string currentSuiteName = string.Empty;
-            int idx = 0;
-            foreach (var methodAndSuiteName in TestsToRun)
+            int index = 0;
+            foreach (MethodAndSuiteName testItem in TestsToRun)
             {
-                if (currentSuiteName != methodAndSuiteName.SuiteName || string.IsNullOrEmpty(currentSuiteName))
+                if (currentSuiteName != testItem.SuiteName || string.IsNullOrEmpty(currentSuiteName))
                 {
-                    currentSuiteName = methodAndSuiteName.SuiteName;
-                    JayLogger.PrintIfVerbose($"~~ Running {currentSuiteName} ~~", ConsoleColor.Blue);
-
+                    currentSuiteName = testItem.SuiteName;
+                    JayLogger.PrintIfVerbose(Glyphes.Info($"Running {currentSuiteName}"), ConsoleColor.Blue);
                 }
-                // var method = methodAndSuiteName.Method;
+
                 try
                 {
-                    if (ValidateTestIsOn(idx))
+                    if (ValidateTestIsOn(index))
                     {
-                        var parameters = methodAndSuiteName.Method.GetParameters();
+                        ParameterInfo[] parameters = testItem.Method.GetParameters();
                         try
                         {
-                            methodAndSuiteName.Method.GetBaseDefinition().Invoke(null, parameters ?? null);
+                            testItem.Method.GetBaseDefinition().Invoke(null, parameters);
                         }
                         catch (Exception exception)
                         {
                             TestsCompleted--;
+                            TestsFailed++;
                             if (exception.InnerException is EvaluationException)
                             {
-                                TestLogger.Exception(exception?.InnerException?.ToString(), methodAndSuiteName.TestName ?? methodAndSuiteName.Method.Name);
+                                TestLogger.Exception(exception.InnerException.ToString(), testItem.TestName ?? testItem.Method.Name);
                                 continue;
                             }
                         }
@@ -61,24 +62,24 @@ public static partial class TestRunner
                             TestsCompleted++;
                         }
                     }
-                    idx++;
+                    index++;
                     TestsStarted++;
                 }
                 catch (Exception exception)
                 {
                     TestsStarted--;
                     TestsCompleted--;
+                    TestsFailed++;
                     if (exception.InnerException is EvaluationException)
                     {
-                        TestLogger.Exception(exception?.InnerException?.ToString(), methodAndSuiteName.TestName ?? methodAndSuiteName.Method.Name);
-                        // TestLogger.Exception(exception?.InnerException?.ToString(), "unset");
+                        TestLogger.Exception(exception.InnerException.ToString(), testItem.TestName ?? testItem.Method.Name);
                         continue;
                     }
                 }
             }
-            JayLogger.PrintIfVerbose($"|| {TestsSuitesStarted} Tests Suites Started ||", ConsoleColor.Gray);
-            JayLogger.PrintIfVerbose($"|| {TestsStarted} Tests Started       ||", ConsoleColor.Gray);
-            JayLogger.PrintIfVerbose($"|| {TestsCompleted} Tests Completed     ||", ConsoleColor.Gray);
+            JayLogger.PrintIfVerbose(Glyphes.Section($"{TestsSuitesStarted} Tests Suites Started"), ConsoleColor.Gray);
+            JayLogger.PrintIfVerbose(Glyphes.Section($"{TestsStarted} Tests Started      "), ConsoleColor.Gray);
+            JayLogger.PrintIfVerbose(Glyphes.Section($"{TestsCompleted} Tests Completed    "), ConsoleColor.Gray);
         }
     }
 
@@ -92,7 +93,7 @@ public static partial class TestRunner
                     Method = methodInfo,
                     TestName = methodInfo
                             .GetCustomAttributesData()
-                            .SelectMany(ad => ad.NamedArguments.Where(na => na.MemberName == "Name"))
+                            .SelectMany(attributeData => attributeData.NamedArguments.Where(namedArg => namedArg.MemberName == "Name"))
                             .FirstOrDefault().TypedValue.Value?.ToString() ?? "not found",
                     SuiteName = suite.Name
                 })
@@ -102,17 +103,33 @@ public static partial class TestRunner
     private static bool ValidateTestIsOn(int idx)
     {
         if (TestsToRun == null) return false;
-        if (TestsToRun.Count() > idx)
+        if (TestsToRun.Count > idx)
         {
+            MethodInfo methodInfo = TestsToRun[idx].Method;
+
+            if (!string.IsNullOrEmpty(TestSettings.TargetFeature))
+            {
+                IEnumerable<JayFeature> methodFeatureAttributes = methodInfo.GetCustomAttributes(typeof(JayFeature), true)
+                    .Cast<JayFeature>();
+                if (methodFeatureAttributes.Any(feature => string.Equals(feature.Name, TestSettings.TargetFeature, StringComparison.OrdinalIgnoreCase)))
+                {
+                    return true;
+                }
+
+                IEnumerable<JayFeature>? declaringTypeFeatureAttributes = methodInfo.DeclaringType?.GetCustomAttributes(typeof(JayFeature), true)
+                    .Cast<JayFeature>();
+                return declaringTypeFeatureAttributes != null && declaringTypeFeatureAttributes.Any(feature => string.Equals(feature.Name, TestSettings.TargetFeature, StringComparison.OrdinalIgnoreCase));
+            }
+
             if (TestSettings.RunAllTests) { return true; }
 
-            var attributeData = TestsToRun[idx].Method.GetCustomAttributesData();
+            IList<CustomAttributeData> customAttributes = methodInfo.GetCustomAttributesData();
 
-            var namedArguments = attributeData
-                    .SelectMany(anon => anon.NamedArguments)
-                    .Where(anon => anon.MemberName == "On");
+            IEnumerable<CustomAttributeNamedArgument> namedArguments = customAttributes
+                    .SelectMany(attributeData => attributeData.NamedArguments)
+                    .Where(namedArg => namedArg.MemberName == "On");
 
-            return !namedArguments.Any(na => na.TypedValue.Value?.ToString() == ((int)Is.Off).ToString());
+            return !namedArguments.Any(namedArg => namedArg.TypedValue.Value?.ToString() == ((int)JaySharp.TestSuite.TestAttributes.Is.Off).ToString());
         }
 
         return false;

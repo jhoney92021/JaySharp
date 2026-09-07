@@ -10,6 +10,7 @@ public static class TestSettings
     public static bool RunAllSuites = false;
     public static bool RunAllTests = false;
     public static Assembly? ToTest = null;
+    public static string? TargetFeature = null;
 
     public static bool Halp = false;
 }

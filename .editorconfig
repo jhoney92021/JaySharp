@@ -1,0 +1,15 @@
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+
+[*.cs]
+# CA1707: Identifiers should not contain underscores (Disabled for readable test method naming)
+dotnet_diagnostic.CA1707.severity = none
+
+# CA2211: Non-constant fields should not be visible (Disabled for ASCII header fields)
+dotnet_diagnostic.CA2211.severity = none
+
+

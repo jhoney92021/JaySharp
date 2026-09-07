@@ -12,39 +12,39 @@ public static class BooleanTests
     [JayTest(On = Is.Off)]
     public static void IsTrue()
     {
-        var underTest = true;
+        bool underTest = true;
         underTest.IsTrue();
     }
     [JayTest(On = Is.Off)]
     public static void IsTrue_Fail()
     {
-        var underTest = false;
+        bool underTest = false;
         underTest.IsTrue();
     }
     [JayTest]
     public static void IsOn()
     {
-        var underTest = true;
+        bool underTest = true;
         underTest.IsOn();
     }
     [JayTest]
     public static void IsOff()
     {
-        var underTest = false;
+        bool underTest = false;
         underTest.IsOff();
     }
     [JayTest]
     public static void ConvertToInt()
     {
-        var underTest = false;
-        var convertedValue = underTest.ConvertToInt();
+        bool underTest = false;
+        int convertedValue = underTest.ConvertToInt();
         convertedValue.Oughta().Be(0);
     }
     [JayTest]
     public static void ConvertToIs()
     {
-        var underTest = false;
-        var convertedValue = underTest.ConvertToIs();
+        bool underTest = false;
+        Is convertedValue = underTest.ConvertToIs();
         convertedValue.Oughta().Be(Is.Off);
     }
 }

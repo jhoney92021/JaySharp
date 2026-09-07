@@ -7,15 +7,15 @@ public static partial class ArrayEvaluations
 {
     public static void Be(this (int[] Value, bool ThrowException) toEvaluate, int[] toCompare)
     {
-        var missing1 = toCompare.Except(toEvaluate.Value).ToArray();
-        var missing2 = new int[0];
+        int[] missing1 = toCompare.Except(toEvaluate.Value).ToArray();
+        int[] missing2 = Array.Empty<int>();
 
-        if (toEvaluate.Value.Count() != toCompare.Count())
+        if (toEvaluate.Value.Length != toCompare.Length)
         {
             missing2 = toEvaluate.Value.Except(toCompare).ToArray();
         }
 
-        if (missing1.Count() + missing2.Count() == 0)
+        if (missing1.Length + missing2.Length == 0)
         {
             TestLogger.PassedInCyan();
         }
@@ -25,20 +25,20 @@ public static partial class ArrayEvaluations
         }
         else
         {
-            var toEvaluateMessage = BuildListMessage(toEvaluate.Value, IEnumerableComparisonMessageType.OughtaBeen);
-            var evaluated = BuildListMessage(missing1, IEnumerableComparisonMessageType.Evaluated);
-            var compared = BuildListMessage(missing2, IEnumerableComparisonMessageType.Compared);
+            string toEvaluateMessage = BuildListMessage(toEvaluate.Value, IEnumerableComparisonMessageType.OughtaBeen);
+            string evaluated = BuildListMessage(missing1, IEnumerableComparisonMessageType.Evaluated);
+            string compared = BuildListMessage(missing2, IEnumerableComparisonMessageType.Compared);
 
             TestLogger.Failed(toEvaluateMessage + evaluated + compared);
         }
     }
     private static string BuildListMessage(int[] missing, IEnumerableComparisonMessageType messageType)
     {
-        if (missing.Count() == 0) { return string.Empty; }
+        if (missing.Length == 0) { return string.Empty; }
 
-        var message = ArrayComparisonMessages.Messages[messageType];
+        string message = ArrayComparisonMessages.Messages[messageType];
 
-        foreach (var number in missing)
+        foreach (int number in missing)
         {
             message = message + $"{number} ";
         }

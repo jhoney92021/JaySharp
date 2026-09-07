@@ -21,21 +21,21 @@ public static class TypeTests
     [JayTest(On = Is.On)]
     public static void CompareTypes()
     {
-        var underTest = new ToTest(1, false);
-        var matchedType = new ToTest(1, false);
+        ToTest underTest = new ToTest(1, false);
+        ToTest matchedType = new ToTest(1, false);
         underTest.Oughta().Be(matchedType);
     }
     [JayTest(On = Is.On)]
     public static void CompareTypes_Fail()
     {
-        var underTest = new ToTest(1, false);
+        ToTest underTest = new ToTest(1, false);
         underTest.Oughta().Be("pp");
     }
     [JayTest(On = Is.On)]
     public static void CompareTypes_Must()
     {
-        var underTest = new ToTest(1, false);
-        var matchedType = new ToTest(1, false);
+        ToTest underTest = new ToTest(1, false);
+        ToTest matchedType = new ToTest(1, false);
         underTest.Must().Be(matchedType);
     }
 }

@@ -10,7 +10,7 @@ public static class StringTests
     [JayTest(Name = "CompareStrings")]
     public static void CompareStrings()
     {
-        var underTest = "99";
+        string underTest = "99";
         underTest.Oughta().Be("99");
     }
     // [JayTest(Name = "CompareStrings_Fail")]
@@ -18,20 +18,19 @@ public static class StringTests
     // [JayTest]
     public static void CompareStrings_Fail()
     {
-        var underTest = "1";
+        string underTest = "1";
         underTest.Oughta().Be("99");
     }
     [JayTest(Name = "CompareStrings_Must_Be")]
     public static void CompareStrings_Must_Be()
     {
-        var underTest = "1";
+        string underTest = "1";
         underTest.Must().Be("1");
     }
-    // [JayTest(Name = "CompareStrings_Must_Be_Fail", On = Is.Off)]
-    [JayTest(Name = "hi mom")]
+    [JayTest(Name = "hi mom", On = Is.Off)]
     public static void CompareStrings_Must_Be_Fail()
     {
-        var underTest = "1";
+        string underTest = "1";
         underTest.Must().Be("99");
     }
 }

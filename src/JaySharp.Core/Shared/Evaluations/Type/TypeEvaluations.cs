@@ -18,7 +18,10 @@ public static class TypeEvaluations
 {
     public static void Be<T>(this TypeEvaluation<T> toEvaluate, object toCompare)
     {
-        if (toEvaluate.Equals(toCompare))
+        bool isMatched = toEvaluate.ToEvaluate != null && toCompare != null &&
+            (Equals(toEvaluate.ToEvaluate, toCompare) || toEvaluate.ToEvaluate.GetType() == toCompare.GetType());
+
+        if (isMatched)
         {
             TestLogger.PassedInCyan();
         }
@@ -34,8 +37,10 @@ public static class TypeEvaluations
 
     public static void BeSameTypeAs<T>(this TypeEvaluation<T> toEvaluate, T toCompare)
     {
-        bool isOfType = toCompare is T;
-        if (toEvaluate.Equals(toCompare))
+        bool isMatched = toEvaluate.ToEvaluate != null && toCompare != null &&
+            (Equals(toEvaluate.ToEvaluate, toCompare) || toEvaluate.ToEvaluate.GetType() == toCompare.GetType());
+
+        if (isMatched)
         {
             TestLogger.PassedInCyan();
         }

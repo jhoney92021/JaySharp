@@ -1,36 +1,48 @@
-using JaySharp.TestSuite.TestRunner;
 using System.Diagnostics;
+using JaySharp.TestSuite.TestRunner;
 
 namespace JaySharp.Shared.Loggers;
 
+/// <summary>
+/// Provides logging helpers specifically formatted for test execution pass and fail output.
+/// </summary>
 public static class TestLogger
 {
+    /// <summary>
+    /// Logs a test pass message in Cyan formatted with the pass glyph tag.
+    /// </summary>
     public static void PassedInCyan()
     {
         if (TestSettings.LogLevel != LogLevel.Succinct)
         {
-            StackTrace stackTrace = new StackTrace();
-            var calledTestMethod = stackTrace?.GetFrame(2)?.GetMethod()?.Name;
+            string callerName = new StackTrace().GetCallerMethodName();
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine($"¡¡ {calledTestMethod} -- passed !!");
+            Console.WriteLine(Glyphes.Pass($"{callerName} -- passed"));
             Console.ForegroundColor = ConsoleColor.Gray;
         }
     }
+
+    /// <summary>
+    /// Logs a test failure message in Red formatted with the fail glyph tag.
+    /// </summary>
+    /// <param name="failureReason">Details of the failure.</param>
     public static void Failed(string? failureReason)
     {
-        StackTrace stackTrace = new StackTrace();
-        var calledTestMethod = stackTrace?.GetFrame(2)?.GetMethod()?.Name;
-        var test = stackTrace?.GetFrame(2)?.GetMethod()?.GetCustomAttributesData()
-                            .SelectMany(ad => ad.NamedArguments.Where(na => na.MemberName == "Name"))
-                            .FirstOrDefault().TypedValue.Value?.ToString();
+        string callerName = new StackTrace().GetCallerMethodName();
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine($"¿¿ {test ?? calledTestMethod} -- failed -- {failureReason} ??");
+        Console.WriteLine(Glyphes.Fail($"{callerName} -- failed -- {failureReason}"));
         Console.ForegroundColor = ConsoleColor.Gray;
     }
+
+    /// <summary>
+    /// Logs an unhandled exception failure message in DarkRed formatted with the fail glyph tag.
+    /// </summary>
+    /// <param name="failureReason">Exception message or details.</param>
+    /// <param name="method">The method name where the exception occurred.</param>
     public static void Exception(string? failureReason, string method)
     {
         Console.ForegroundColor = ConsoleColor.DarkRed;
-        Console.WriteLine($"¿¿ {method} -- failed -- {failureReason} ??");
+        Console.WriteLine(Glyphes.Fail($"{method} -- failed -- {failureReason}"));
         Console.ForegroundColor = ConsoleColor.Gray;
     }
 }

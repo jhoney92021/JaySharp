@@ -1,26 +1,42 @@
-using JaySharp.TestSuite.TestRunner;
 using System.Diagnostics;
+using JaySharp.TestSuite.TestRunner;
 
 namespace JaySharp.Shared.Loggers;
 
+/// <summary>
+/// Provides utility methods for colored console logging and verbosity control.
+/// </summary>
 public class JayLogger
 {
+    /// <summary>
+    /// Prints text to the console in blue color, prefixed with the caller method name.
+    /// </summary>
+    /// <param name="toPrint">The message string to print.</param>
     public static void PrintInBlue(string toPrint)
     {
-        StackTrace stackTrace = new StackTrace();
-        var calledTestMethod = stackTrace?.GetFrame(2)?.GetMethod()?.Name;
+        string calledTestMethod = new StackTrace().GetCallerMethodName();
         Console.ForegroundColor = ConsoleColor.Blue;
-        Console.WriteLine(toPrint);
+        Console.WriteLine($"[{calledTestMethod}] {toPrint}");
         Console.ForegroundColor = ConsoleColor.Gray;
     }
+
+    /// <summary>
+    /// Prints text to the console in red color, prefixed with the caller method name.
+    /// </summary>
+    /// <param name="toPrint">The message string to print.</param>
     public static void PrintInRed(string toPrint)
     {
-        StackTrace stackTrace = new StackTrace();
-        var calledTestMethod = stackTrace?.GetFrame(2)?.GetMethod()?.Name;
-        Console.ForegroundColor = ConsoleColor.Blue;
-        Console.WriteLine(toPrint);
+        string calledTestMethod = new StackTrace().GetCallerMethodName();
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine($"[{calledTestMethod}] {toPrint}");
         Console.ForegroundColor = ConsoleColor.Gray;
     }
+
+    /// <summary>
+    /// Prints text to the console with the specified foreground color.
+    /// </summary>
+    /// <param name="toPrint">The message string to print.</param>
+    /// <param name="printColor">The foreground color to use.</param>
     public static void PrintWithColor(string toPrint, ConsoleColor printColor)
     {
         Console.ForegroundColor = printColor;
@@ -28,8 +44,16 @@ public class JayLogger
         Console.ForegroundColor = ConsoleColor.Gray;
     }
 
+    /// <summary>
+    /// Prints text to the console only if the global log level is set to <see cref="LogLevel.Verbose"/>.
+    /// </summary>
+    /// <param name="toPrint">The message string to print.</param>
+    /// <param name="colorToPrint">The foreground color to use.</param>
     public static void PrintIfVerbose(string toPrint, ConsoleColor colorToPrint)
     {
-        if (TestSettings.LogLevel == Loggers.LogLevel.Verbose) Loggers.JayLogger.PrintWithColor(toPrint, colorToPrint);
+        if (TestSettings.LogLevel == Loggers.LogLevel.Verbose)
+        {
+            PrintWithColor(toPrint, colorToPrint);
+        }
     }
 }

@@ -10,25 +10,25 @@ public static class CharacterTests
     [JayTest(Name = "CompareCharacters")]
     public static void CompareCharacters()
     {
-        var underTest = 'p';
+        char underTest = 'p';
         underTest.Oughta().Be('p');
     }
     [JayTest(Name = "CompareCharacters_Fail")]
     public static void CompareCharacters_Fail()
     {
-        var underTest = 'p';
+        char underTest = 'p';
         underTest.Oughta().Be('Q');
     }
     [JayTest(Name = "CompareCharacters_Must_Be")]
     public static void CompareCharacters_Must_Be()
     {
-        var underTest = '1';
+        char underTest = '1';
         underTest.Must().Be('1');
     }
     [JayTest(Name = "CompareCharacters_Must_Be_Fail", On = Is.Off)]
     public static void CompareCharacters_Must_Be_Fail()
     {
-        var underTest = 'q';
+        char underTest = 'q';
 
         underTest.Must().Be('P');
     }

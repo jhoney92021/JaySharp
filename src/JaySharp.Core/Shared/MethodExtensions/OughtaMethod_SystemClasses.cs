@@ -5,7 +5,7 @@ public static partial class OughtaMethod
 {
     public static TypeEvaluation<T> Oughta<T>(this T toEvaluate)
     {
-        var typeEvaluation = new TypeEvaluation<T>(toEvaluate, false);
+        TypeEvaluation<T> typeEvaluation = new TypeEvaluation<T>(toEvaluate, false);
         return typeEvaluation;
     }
     public static (string, bool) Oughta(this string toEvaluate)

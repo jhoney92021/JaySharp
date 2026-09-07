@@ -1,0 +1,8 @@
+{
+  "EnforceFileScopedNamespaces": true,
+  "EnforceExplicitVar": false,
+  "EnforceExplicitVisibility": true,
+  "LogLevel": "Verbose",
+  "RunAllSuitesByDefault": true,
+  "RunAllTestsByDefault": true
+}

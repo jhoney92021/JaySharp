@@ -12,25 +12,25 @@ public static class IsTests
     [JayTest]
     public static void IsOn()
     {
-        var underTest = Is.On;
+        Is underTest = Is.On;
         underTest.Oughta().Be(Is.On);
     }
     [JayTest]
     public static void IsOn_Fail()
     {
-        var underTest = Is.On;
+        Is underTest = Is.On;
         underTest.Oughta().Be(Is.Off);
     }
     [JayTest]
     public static void IsOff()
     {
-        var underTest = Is.Off;
+        Is underTest = Is.Off;
         underTest.Oughta().Be(Is.Off);
     }
     [JayTest]
     public static void IsOff_Fail()
     {
-        var underTest = Is.Off;
+        Is underTest = Is.Off;
         underTest.Oughta().Be(Is.On);
     }
 }

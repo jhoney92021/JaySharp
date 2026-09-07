@@ -1,7 +1,8 @@
+using System.Reflection;
+using JaySharp.FeatureFlagging.Attributes;
 using JaySharp.Shared.Loggers;
 using JaySharp.TestSuite.IntermediateObjectDefinitions;
 using JaySharp.TestSuite.TestAttributes;
-using System.Reflection;
 
 namespace JaySharp.TestSuite.TestRunner;
 
@@ -16,28 +17,28 @@ public static partial class TestRunner
             JayLogger.PrintWithColor($"### entry {AssemblyEntry} ###", ConsoleColor.Yellow);
         }
 
-        var entryAsm = Assembly.GetEntryAssembly();
-        if (entryAsm != null)
+        Assembly? entryAssembly = Assembly.GetEntryAssembly();
+        if (entryAssembly != null)
         {
-            foreach (var refAsmName in entryAsm.GetReferencedAssemblies())
+            foreach (AssemblyName referencedAssemblyName in entryAssembly.GetReferencedAssemblies())
             {
-                try { Assembly.Load(refAsmName); } catch { }
+                try { Assembly.Load(referencedAssemblyName); } catch { }
             }
         }
 
-        var assembliesToScan = TestSettings.ToTest != null
+        Assembly[] assembliesToScan = TestSettings.ToTest != null
             ? new[] { TestSettings.ToTest }
             : AppDomain.CurrentDomain.GetAssemblies()
-                .Where(a => !a.IsDynamic)
+                .Where(assembly => !assembly.IsDynamic)
                 .ToArray();
 
-        var suites = new List<SuiteAndName>();
-        foreach (var asm in assembliesToScan)
+        List<SuiteAndName> suites = new();
+        foreach (Assembly targetAsm in assembliesToScan)
         {
             try
             {
-                var found = GetTypesWithAttribute(asm, TestSuiteType);
-                suites.AddRange(found);
+                SuiteAndName[] foundSuites = GetTypesWithAttribute(targetAsm, TestSuiteType);
+                suites.AddRange(foundSuites);
             }
             catch
             {
@@ -45,7 +46,7 @@ public static partial class TestRunner
             }
         }
         TestSuitesToRun = suites.ToArray();
-        JayLogger.PrintIfVerbose($"~~ Retrieved {TestSuitesToRun.Length} Test Suites ~~", ConsoleColor.Yellow);
+        JayLogger.PrintIfVerbose(Glyphes.Info($"Retrieved {TestSuitesToRun.Length} Test Suites"), ConsoleColor.Yellow);
     }
 
     private static SuiteAndName[] GetTypesWithAttribute(Assembly assembly, Type attribute)
@@ -59,7 +60,7 @@ public static partial class TestRunner
                     Type = type,
                     Name = type
                             .GetCustomAttributesData()
-                            .SelectMany(ad => ad.NamedArguments.Where(na => na.MemberName == "Name"))
+                            .SelectMany(attributeData => attributeData.NamedArguments.Where(namedArg => namedArg.MemberName == "Name"))
                             .FirstOrDefault().TypedValue.Value?.ToString()
                             ?? type.Name
                 })
@@ -69,17 +70,26 @@ public static partial class TestRunner
     private static bool ValidateSuiteIsOn(int idx)
     {
         if (TestSuitesToRun == null) return false;
-        if (TestSuitesToRun.Count() > idx)
+        if (TestSuitesToRun.Length > idx)
         {
+            Type suiteType = TestSuitesToRun[idx].Type;
+
+            if (!string.IsNullOrEmpty(TestSettings.TargetFeature))
+            {
+                IEnumerable<JayFeature> featureAttributes = suiteType.GetCustomAttributes(typeof(JayFeature), true)
+                    .Cast<JayFeature>();
+                return featureAttributes.Any(feature => string.Equals(feature.Name, TestSettings.TargetFeature, StringComparison.OrdinalIgnoreCase));
+            }
+
             if (TestSettings.RunAllSuites) { return true; }
 
-            var attributeData = TestSuitesToRun[idx].Type.GetCustomAttributesData();
+            IList<CustomAttributeData> customAttributes = suiteType.GetCustomAttributesData();
 
-            var namedArguments = attributeData
-                    .SelectMany(anon => anon.NamedArguments)
-                    .Where(anon => anon.MemberName == "On");
+            IEnumerable<CustomAttributeNamedArgument> namedArguments = customAttributes
+                    .SelectMany(attributeData => attributeData.NamedArguments)
+                    .Where(namedArg => namedArg.MemberName == "On");
 
-            return !namedArguments.Any(na => na.TypedValue.Value?.ToString() == ((int)Is.Off).ToString());
+            return !namedArguments.Any(namedArg => namedArg.TypedValue.Value?.ToString() == ((int)JaySharp.TestSuite.TestAttributes.Is.Off).ToString());
         }
 
         return false;

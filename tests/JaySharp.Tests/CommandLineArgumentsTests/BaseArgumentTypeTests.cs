@@ -10,8 +10,8 @@ public static class BaseArgumentTypeExtensionsTests
     [JayTest(On = Is.On)]
     public static void ToBaseArgumentType()
     {
-        var underTest = "JaySharp";
-        var result = underTest.ToBaseArgumentType();
+        string underTest = "JaySharp";
+        BaseArgumentType result = underTest.ToBaseArgumentType();
         result.Oughta().Be(BaseArgumentType.JaySharp);
     }
 }
