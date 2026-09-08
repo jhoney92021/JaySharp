@@ -59,14 +59,14 @@ An automated linter and runtime analyzer that detects:
 
 ---
 
-## Feature 6: Fluent Defensive Guard Chains
+## Feature 6: Fluent Defensive Guard Chains (Completed)
 
 ### Capabilities
 - Expand assertion methods for common defensive programming scenarios:
-  - `toEvaluate.Must().NotBeNull()`
-  - `number.Must().BeBetween(min, max)`
-  - `text.Oughta().StartWith("http")`
-  - Fluent Chaining: `value.Must().NotBeNull().And().BeGreaterThan(0)`
+  - `toEvaluate.Must().NotBeNull()` / `toEvaluate.Must().BeNull()`
+  - `number.Must().BeBetween(min, max)` / `.BeGreaterThan()` / `.BeLessThan()`
+  - `text.Oughta().StartWith("http")` / `.EndWith()` / `.Contain()`
+  - Fluent Chaining: `value.Must().NotBeNull().And().StartWith("Ta").And().Contain("am")`
 
 ---
 
@@ -143,4 +143,8 @@ int internalState = Reflect.GetPrivateField<int>(pet, "_internalState");
 ### 13. Architectural Invariant Enforcer (`Reflect.EnforceArchitecture()`)
 - **Status:** Roadmap Proposal.
 - **Capability:** Reflects over solution assemblies to enforce architectural boundaries (e.g. all DTOs must be `sealed`, no direct DB drivers in UI assemblies).
+
+### 14. PHI/PII De-Identification & Anonymization Engine (`JaySharp.DeId`) (Completed)
+- **Status:** Integrated into `JaySharp.Core`.
+- **Capability:** Reflection-based de-identification engine (`JayDeId.Scramble<T>()`) with `[JaySensitive(MaskMode)]` attribute annotations to automatically sanitize sensitive health, financial, and personal data (SSN masking, synthetic names, safe emails, phone numbers, date jittering, SHA256 hashing, and redacting) for HIPAA-compliant test fixtures.
 

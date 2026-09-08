@@ -8,7 +8,7 @@ public static partial class OughtaMethod
         TypeEvaluation<T> typeEvaluation = new TypeEvaluation<T>(toEvaluate, false);
         return typeEvaluation;
     }
-    public static (string, bool) Oughta(this string toEvaluate)
+    public static (string? Value, bool ThrowException) Oughta(this string? toEvaluate)
     {
         return (toEvaluate, false);
     }

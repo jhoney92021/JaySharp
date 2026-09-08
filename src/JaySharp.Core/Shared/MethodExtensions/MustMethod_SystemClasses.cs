@@ -7,7 +7,7 @@ public static partial class MustMethod
     {
         return new TypeEvaluation<T>(toEvaluate, true);
     }
-    public static (string, bool) Must(this string toEvaluate)
+    public static (string? Value, bool ThrowException) Must(this string? toEvaluate)
     {
         return (toEvaluate, true);
     }
